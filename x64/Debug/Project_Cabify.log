@@ -1,2 +1,3 @@
 ﻿  Project_Cabify.cpp
+F:\Yoobee - Onedrive\OneDrive - UP Education\103\Project_Cabify\Project_Cabify\Project_Cabify.cpp(132,15): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   Project_Cabify.vcxproj -> F:\Yoobee - Onedrive\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe
