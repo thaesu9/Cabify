@@ -6,6 +6,7 @@ using namespace std;
 // function to print logo
 void CabifyLogo()
 {
+    cout << "\033[1;33m"; // Set text color to bright yellow
     cout << " " << endl;
     cout << "                                ========                                     " << endl;
     cout << "                            ___/________\\___                                 " << endl;
@@ -22,5 +23,8 @@ void CabifyLogo()
     cout << "                            Welcome to CABIFY!                          " << endl;
 
     cout << "   This is Cabify, your Taxi service to make your journey pleasurable..." << endl;
-    cout << "\n=============================================================================" << endl;
+  
+    cout << "\n_____________________________________________________________________________" << endl;
+    cout << "\033[0m"; // Reset text color to default
+    
 }

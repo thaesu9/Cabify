@@ -7,7 +7,7 @@
 
 // using namespace std;
 
-// structures
+// struct for customer information
 struct Customer
 {
     std::string firstName;
@@ -28,6 +28,7 @@ enum SpecialNeeds { infant = 1, physicalNeeds };
 enum Luggage { normal = 1, heavy };
 enum paymentStatus { paid = 1, pending };
 
+// struct for trip booking
 struct Journey
 {
     std::string tripStart;
@@ -40,17 +41,32 @@ struct Journey
     paymentStatus payStatus;
 };
 
+// struct for admin
+struct Admin
+{
+    std::string username = "admin";
+    std::string password = "admin";
+    bool attemptFailed = false;
+    int failedAttempts = 1;
+};
 
 // function to print logo - Logo.cpp
 void CabifyLogo();
 
 // function for Main menu - MainMenu.cpp
 void MainMenu(int* choice);
+void TermsConditions();
 void ClearScreen();
 
+// customer - CustomerFunctions.cpp
 void NewAcc();
 void TripBooking();
 void ExistingAcc();
-void BookCab(); // book cab main screen
+void BookCab(); // main menu
+
+// admin - Admin.cpp
+void adminLogin();
+void adminMenu();
+void customerInformation();
 
 #endif 

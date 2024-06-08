@@ -12,17 +12,18 @@
 
 using namespace std;
 
-vector<Customer> customers; // definition of extern variable
+// vector<Customer> customers; // definition of extern variable
 
+Admin adm;
 
 int main()
 {
-
     CabifyLogo();
     int choice;
 
     while (true)
     {
+        
         MainMenu(&choice);
 
         switch (choice)
@@ -30,17 +31,16 @@ int main()
         case 1:
             ClearScreen();
             BookCab();
-            cout << endl;
             break;
 
         case 2:
             // driver
-            cout << endl;
             break;
 
         case 3:
             // terms and conditions
-            cout << endl;
+            ClearScreen();
+            TermsConditions();
             break;
 
         case 4:
@@ -49,10 +49,23 @@ int main()
             cout << endl;
             return 0;
 
-        case 5:
+        case 0:
             // login as admin
-            cout << endl;
+            if(!adm.attemptFailed)
+            {
+                ClearScreen();
+                adminLogin();
+            }
+            else
+            {
+                ClearScreen();
+                cout << "\n You have reached the maximum number of attempts. Press Enter to go back to main menu." << endl;
+                cin.ignore();
+                cin.get();
+                ClearScreen();
+            }
             break;
+
         default:
             ClearScreen();
             cout << "Invalid choice. Please choose again." << endl;
