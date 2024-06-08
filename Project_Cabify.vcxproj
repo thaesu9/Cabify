@@ -127,7 +127,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CustomerFunctions.cpp" />
+    <ClCompile Include="Logo.cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Project_Cabify.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Cabify.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
