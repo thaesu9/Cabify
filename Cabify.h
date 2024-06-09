@@ -31,15 +31,18 @@ enum paymentStatus { paid = 1, pending };
 // struct for trip booking
 struct Journey
 {
+    long long int tripID;
     std::string tripStart;
     std::string tripEnd;
     std::string bookingDate;
     std::string bookingTime;
-    int passengers;
+    int passengers = 0;
     SpecialNeeds specialN;
     Luggage luggage;
     paymentStatus payStatus;
 };
+
+extern std::vector<Journey> journey;
 
 // struct for admin
 struct Admin
@@ -58,11 +61,14 @@ void MainMenu(int* choice);
 void TermsConditions();
 void ClearScreen();
 
+// trip - TripBooking.cpp
+void TripBooking();
+
 // customer - CustomerFunctions.cpp
 void NewAcc();
-void TripBooking();
 void ExistingAcc();
 void BookCab(); // main menu
+
 
 // admin - Admin.cpp
 void adminLogin();

@@ -57,7 +57,7 @@ void adminMenu()
 	while(true)
 	{
 		cout << "\n Please choose from following options to proceed." << endl;
-		cout << " 1. Customer information" << endl;
+		cout << "\n 1. Customer information" << endl;
 		cout << " 2. Driver Information" << endl;
 		cout << " 3. Trip Information" << endl;
 		cout << " 4. Back" << endl;
@@ -70,8 +70,8 @@ void adminMenu()
 		{
 		case 1:
 			// customer information
-			customerInformation();
 			ClearScreen();
+			customerInformation();
 			break;
 
 		case 2:
@@ -109,9 +109,130 @@ void adminMenu()
 // Customer information
 void customerInformation()
 {
-	cout << "Search Customer by " << endl;
-	cout << "1. Name" << endl;
-	cout << "2. Email" << endl;
+	string firstName, lastName, fullName, email;
+	while (true)
+	{
+		cout << "\n Search Customer by " << endl;
+		cout << "\n 1. Name" << endl;
+		cout << " 2. Email" << endl;
+		cout << " 3. Back" << endl;
+		int choice;
+		cout << "\n Choice: ";
+		cin >> choice;
+		cin.ignore();
 
-	
+		switch (choice)
+		{
+		case 1:
+			ClearScreen();
+
+			// search by name
+			cout << "\n Customer Details" << endl;
+			cout << " -----------------" << endl;
+			cout << " Enter Customer First Name : ";
+			getline(cin, firstName);
+			cout << " Enter Customer Last Name : ";
+			getline(cin, lastName);
+			fullName = firstName + " " + lastName;
+			{
+				bool found = false;
+				for (const auto& cus : customers)
+				{
+					if (fullName == cus.fullName)
+					{
+						ClearScreen();
+						cout << "\n Customer Details" << endl;
+						cout << " -----------------------------" << endl;
+						cout << " Name           : " << cus.fullName << endl;
+						cout << " Email          : " << cus.email << endl;
+						cout << " Contact Number : " << cus.phone << endl;
+						cout << " Address        : " << cus.address << endl << endl;
+						if (cus.paymentMethod == 2)
+						{
+							cout << " Payment Method : Cash" << endl;
+						}
+						else if (cus.paymentMethod == 1)
+						{
+							cout << " Payment Method : Card" << endl;
+						}
+						cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl;
+
+
+						cout << "\n Press Enter to go back." << endl;
+						cin.get();
+						found = true;
+						ClearScreen();
+					}
+				}
+				if (!found)
+				{
+					cout << "\n Customer information not found. Press Enter to go back." << endl;
+					cin.get();
+					ClearScreen();
+				}
+			}
+			break;
+
+		case 2:
+			ClearScreen();
+
+			// search by email
+			cout << "\n Customer Details" << endl;
+			cout << " -----------------" << endl;
+			cout << " Enter Customer Email : ";
+			getline(cin, email);
+			{
+				bool found = false;
+				for (const auto& cus : customers)
+				{
+					if (email == cus.email)
+					{
+						ClearScreen();
+						cout << "\n Customer Details" << endl;
+						cout << " -----------------------------" << endl;
+						cout << " Name           : " << cus.fullName << endl;
+						cout << " Email          : " << cus.email << endl;
+						cout << " Contact Number : " << cus.phone << endl;
+						cout << " Address        : " << cus.address << endl << endl;
+						if (cus.paymentMethod == 2)
+						{
+							cout << " Payment Method : Cash" << endl;
+						}
+						else if (cus.paymentMethod == 1)
+						{
+							cout << " Payment Method : Card" << endl;
+						}
+						cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl;
+
+
+						cout << "\n Press Enter to go back." << endl;
+						cin.get();
+						found = true;
+						ClearScreen();
+					}
+				}
+				if (!found)
+				{
+					cout << "\n Customer information not found. Press Enter to go back." << endl;
+					cin.get();
+					ClearScreen();
+				}
+			}
+			break;
+
+		case 3:
+			// back to previous menu
+			ClearScreen();
+			return;
+
+		default:
+			ClearScreen();
+			cout << "Invalid choice. Please choose again : " << endl;
+			break;
+			
+		}
+
+
+
+	}
 }

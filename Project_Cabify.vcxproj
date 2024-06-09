@@ -132,6 +132,7 @@
     <ClCompile Include="Logo.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Project_Cabify.cpp" />
+    <ClCompile Include="TripBooking.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Cabify.h" />
