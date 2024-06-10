@@ -82,6 +82,7 @@ void adminMenu()
 		case 3:
 			// trip information
 			ClearScreen();
+			TripInformation();
 			break;
 
 		case 4:
@@ -231,8 +232,123 @@ void customerInformation()
 			break;
 			
 		}
+	}
+}
 
+void TripInformation()
+{
+	long int tripID;
+	while (true)
+	{
+		cout << "\n Trip Information " << endl;
+		cout << "\n 1. View all trips" << endl;
+		cout << " 2. Search by Trip ID" << endl;
+		cout << " 3. Back" << endl;
+		int choice;
+		cout << "\n Choice: ";
+		cin >> choice;
+		cin.ignore();
 
+		switch (choice)
+		{
+		case 1:
+			ClearScreen();
+			// view all trips
+			cout << "\n Trip Information " << endl;
+			cout << " -------------------------------" << endl;
+			for (const auto& trip : journey)
+			{
+				cout << " Customer Name : " << trip.customerName << endl;
+				cout << " Trip ID           : " << trip.tripID << endl;
+				cout << " Pick up location  : " << trip.tripStart << endl;
+				cout << " Drop off location : " << trip.tripEnd << endl;
+				cout << " Booking Date      : " << trip.bookingDate << endl;
+				cout << " Booking Time      : " << trip.bookingTime << endl;
+				cout << " Total Passengers  : " << trip.passengers << endl;
 
+				if (trip.specialN == 1)
+					cout << " Special Request   : None " << endl;
+				else if (trip.specialN == 2)
+					cout << " Special Request   : I have a baby " << endl;
+				else if (trip.specialN == 3)
+					cout << " Special Request   : I need special aid " << endl;
+				else
+					cout << " Special Request   : None " << endl;
+
+				if (trip.tripStatus == true)
+					cout << " Trip Status : Completed " << endl << endl;
+				else
+					cout << " Trip Status : Cancelled " << endl << endl;
+
+				
+			}
+			cout << "\n Press Enter to go back." << endl;
+			cin.get();
+
+			ClearScreen();
+			break;
+
+		case 2: 
+			ClearScreen();
+			// search by trip ID
+			cout << "\n Enter Trip ID : ";
+			cin >> tripID;
+			cin.ignore();
+			{
+				bool found = 0;
+				for (auto& trip : journey)
+				{
+					if (tripID == trip.tripID)
+					{
+						ClearScreen();
+						cout << "\n Trip Information Details" << endl;
+						cout << " -------------------------------" << endl;
+						cout << " Customer Name     : " << trip.customerName << endl;
+						cout << " Trip ID           : " << trip.tripID << endl;
+						cout << " Pick up location  : " << trip.tripStart << endl;
+						cout << " Drop off location : " << trip.tripEnd << endl;
+						cout << " Booking Date      : " << trip.bookingDate << endl;
+						cout << " Booking Time      : " << trip.bookingTime << endl;
+						cout << " Total Passengers  : " << trip.passengers << endl;
+
+						if (trip.specialN == 1)
+							cout << " Special Request   : None " << endl;
+						else if (trip.specialN == 2)
+							cout << " Special Request   : I have a baby " << endl;
+						else if (trip.specialN == 3)
+							cout << " Special Request   : I need special aid " << endl;
+						else
+							cout << " Special Request   : None " << endl;
+
+						if (trip.tripStatus == true)
+							cout << " Trip Status : Completed " << endl << endl;
+						else
+							cout << " Trip Status : Cancelled " << endl << endl;
+
+						cout << "\n Press Enter to go back." << endl;
+						cin.get();
+						found = true;
+						ClearScreen();
+					}
+				}
+				if (!found)
+				{
+					cout << "\n Trip information not found. Press Enter to go back." << endl;
+					cin.get();
+					ClearScreen();
+				}
+			}
+			break;
+
+		case 3:
+			// back to previous menu
+			ClearScreen();
+			return;
+
+		default:
+			ClearScreen();
+			cout << "Invalid choice. Please choose again : " << endl;
+			break;
+		}
 	}
 }

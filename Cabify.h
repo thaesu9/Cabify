@@ -5,8 +5,6 @@
 #include <string>
 #include <vector>
 
-// using namespace std;
-
 // struct for customer information
 struct Customer
 {
@@ -24,22 +22,22 @@ struct Customer
 extern std::vector<Customer> customers; // store customers information in vector
 // extern to avoid multiple definition error
 
-enum SpecialNeeds { infant = 1, physicalNeeds };
-enum Luggage { normal = 1, heavy };
-enum paymentStatus { paid = 1, pending };
+enum SpecialNeeds { none = 1, infant , physicalNeeds };
 
 // struct for trip booking
 struct Journey
 {
-    long long int tripID;
+    long long int tripID = 0;
+    std::string customerName;
     std::string tripStart;
     std::string tripEnd;
     std::string bookingDate;
     std::string bookingTime;
     int passengers = 0;
     SpecialNeeds specialN;
-    Luggage luggage;
-    paymentStatus payStatus;
+    int luggage = 0;
+    int payStatus = 0;
+    bool tripStatus = true;
 };
 
 extern std::vector<Journey> journey;
@@ -62,7 +60,9 @@ void TermsConditions();
 void ClearScreen();
 
 // trip - TripBooking.cpp
-void TripBooking();
+void TripBooking(const std::string* email);
+void PrintBill(long int tripID);
+void CancelBooking(const std::string* email);
 
 // customer - CustomerFunctions.cpp
 void NewAcc();
@@ -74,5 +74,6 @@ void BookCab(); // main menu
 void adminLogin();
 void adminMenu();
 void customerInformation();
+void TripInformation();
 
 #endif 

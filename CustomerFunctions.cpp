@@ -72,7 +72,7 @@ void NewAcc()
         cin >> newCus.paymentMethod;
         if (cin.fail() || (newCus.paymentMethod != 1 && newCus.paymentMethod != 2))
         {
-            cin.clear(); // clear the error flag
+            cin.clear(); // clear input
             cin.ignore(); // discard invalid input
             cout << " Invalid choice. Please enter 1 for card or 2 for cash." << endl << endl;
         }
@@ -100,7 +100,7 @@ void NewAcc()
 
     ClearScreen();
     cout << "\n Thank you for joining Cabify. You can now start your journey." << endl;
-    cout << "\n Please login to proceed with your booking." << endl;
+    cout << " Please login to proceed with your booking." << endl;
 
 }
 
@@ -127,7 +127,9 @@ void ExistingAcc()
                 cout << " What can we do for you today? " << endl << endl;
                 cout << " 1. Book a cab" << endl;
                 cout << " 2. Cancel Booking" << endl;
-                cout << " 3. Back" << endl;
+                cout << " 3. View my Profile" << endl;
+                cout << " 4. My Bookings" << endl;
+                cout << " 5. Back" << endl;
                 int choice;
                 cout << "\n Choice : ";
                 cin >> choice;
@@ -137,15 +139,88 @@ void ExistingAcc()
                 case 1:
                     ClearScreen();
                     // book a trip
-                    TripBooking();
+                    TripBooking(&email);
                     break;
 
                 case 2:
+                    ClearScreen();
                     //cancel booking
-                    cout << endl;
+                    CancelBooking(&email);
                     break;
 
                 case 3:
+                    ClearScreen();
+                    // view profile
+                    cout << "\n Profile Details" << endl;
+                    cout << " -----------------------------" << endl;
+                    cout << " Name           : " << cus.fullName << endl;
+                    cout << " Email          : " << cus.email << endl;
+                    cout << " Contact Number : " << cus.phone << endl;
+                    cout << " Address        : " << cus.address << endl << endl;
+                    if (cus.paymentMethod == 2)
+                    {
+                        cout << " Payment Method : Cash" << endl;
+                    }
+                    else if (cus.paymentMethod == 1)
+                    {
+                        cout << " Payment Method : Card" << endl;
+                        cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl;
+                    }
+
+                    cin.ignore();
+                    cout << "\n Press Enter to go back." << endl;
+                    cin.get();
+                    break;
+
+                case 4:
+                    ClearScreen();
+                    // view booking
+                    cout << "\n Booking history" << endl;
+                    cout << " -----------------------------" << endl;
+
+                    {
+                        bool tripexist = 0;
+                        for (const auto& trip : journey)
+                        {
+                            if (cus.firstName == trip.customerName)
+                            {
+                                cout << " Trip ID           : " << trip.tripID << endl;
+                                cout << " Pick up location  : " << trip.tripStart << endl;
+                                cout << " Drop off location : " << trip.tripEnd << endl;
+                                cout << " Booking Date      : " << trip.bookingDate << endl;
+                                cout << " Booking Time      : " << trip.bookingTime << endl;
+                                cout << " Total Passengers  : " << trip.passengers << endl;
+
+                                if (trip.specialN == 1)
+                                    cout << " Special Request   : None " << endl;
+                                else if (trip.specialN == 2)
+                                    cout << " Special Request   : I have a baby " << endl;
+                                else if (trip.specialN == 3)
+                                    cout << " Special Request   : I need special aid " << endl;
+                                else
+                                    cout << " Special Request   : None " << endl;
+
+                                if (trip.tripStatus == true)
+                                    cout << " Trip Status : Completed" << endl << endl;
+                                else
+                                    cout << " Trip Status : Cancelled" << endl << endl;
+
+                                tripexist = 1;
+                            }
+                            if (!tripexist)
+                            {
+                                cout << "\n You have no bookings yet." << endl << endl;
+                            }
+
+                        }
+                    }
+
+                    cin.ignore();
+                    cout << "\n Press Enter to go back." << endl;
+                    cin.get();
+                    break;
+
+                case 5:
                     ClearScreen();
                     return;
 
