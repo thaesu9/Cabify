@@ -31,7 +31,6 @@ bool VisaCardCheck(const string& visaCard)
             return false;
         }
     }
-
     return true;
 }
 
@@ -100,12 +99,11 @@ void NewAcc()
             break;
         }
     }
-
+    cin.ignore();
     if (newCus.paymentMethod == 1)
     {
         while (true)
         {
-            cin.ignore();
             cout << " Please enter Visa Card Number (no spacing) : ";
             getline(cin, newCus.visaCard);
 
