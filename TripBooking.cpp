@@ -16,7 +16,25 @@ void TripBooking(const string* email)
 {
     Journey newTrip;
     srand(static_cast<unsigned>(time(NULL)));
-    newTrip.tripID = 1000 + rand() % 9000; // to generate random 4 digit code
+
+    vector<int> num;   // vector to keep track of unique num generated
+    int randomNum;
+    bool unique;
+
+    do {
+        unique = true;
+        randomNum = 1000 + rand() % 9000;  // generate random 4 digit code
+
+        if (find(num.begin(), num.end(), randomNum) != num.end())
+        {
+            unique = false;
+        }
+    } while (!unique);  // repeat if the number is not unique
+
+    num.push_back(randomNum);
+    newTrip.tripID = randomNum;
+
+    // newTrip.tripID = 1000 + rand() % 9000; // to generate random 4 digit code
     
     cin.ignore();
     cout << " \n Let Cabify take you to your destination." << endl << endl;

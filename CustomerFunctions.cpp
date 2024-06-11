@@ -11,6 +11,30 @@ using namespace std;
 
 vector<Customer> customers; // definition of extern variable
 
+bool VisaCardCheck(const string& visaCard)
+{
+    if (visaCard.length() != 16)
+    {
+        return false;
+    }
+
+    // check first digit
+    if (visaCard[0] != '4')
+    {
+        return false;
+    }
+
+    for (char c : visaCard)
+    {
+        if (!isdigit(c))   // if char c is not digit
+        {
+            return false;
+        }
+    }
+
+    return true;
+}
+
 // function for new account
 void NewAcc()
 {
@@ -79,9 +103,23 @@ void NewAcc()
 
     if (newCus.paymentMethod == 1)
     {
-        cout << " Please enter Visa Card Number : ";
-        cin.ignore();
-        getline(cin, newCus.visaCard);
+        while (true)
+        {
+            cin.ignore();
+            cout << " Please enter Visa Card Number (no spacing) : ";
+            getline(cin, newCus.visaCard);
+
+            if (VisaCardCheck(newCus.visaCard))
+            {
+                break;
+            }
+            else
+            {
+                cout << "\n Invalid visa card. Please fill the valid visa card." << endl << endl;
+            }
+            
+        }
+        
         cout << " Visa card expiry date (MM/YY) : ";
         getline(cin, newCus.visaExp);
     }

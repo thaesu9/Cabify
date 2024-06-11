@@ -116,7 +116,7 @@ void NewDriverAcc()
     // gender
     while (true)
     {
-        cout << " Gender (1 = male, 2 = female, 3 = gender diverse)";
+        cout << " Gender (1 = male, 2 = female, 3 = gender diverse) : ";
         cin >> newDriver.gender;
         if (cin.fail() || (newDriver.gender != 1 && newDriver.gender != 2 && newDriver.gender != 3))
         {
@@ -149,6 +149,7 @@ void NewDriverAcc()
     cout << " Driving License Version : ";
     getline(cin, newDriver.D_licenseVersion);
 
+    // license expire date check
     while(true)
     {
         cout << " Driving License Expiry Date (DD/MM/YYYY) : " << endl;
@@ -213,10 +214,25 @@ void NewDriverAcc()
         return;     // go back to main menu 
     }
 
-    cout << " Warrent of Fitness (WOF) Expiry Date (DD/MM/YYYY) : " << endl;
-    cout << " DD   : "; cin >> newDriver.WOFdd;
-    cout << " MM   : "; cin >> newDriver.WOFmm;
-    cout << " YYYY : "; cin >> newDriver.WOFyyyy;
+    // WOF date check
+    while (true)
+    {
+        cout << " Warrent of Fitness (WOF) Expiry Date (DD/MM/YYYY) : " << endl;
+        cout << " DD   : "; cin >> newDriver.WOFdd;
+        cout << " MM   : "; cin >> newDriver.WOFmm;
+        cout << " YYYY : "; cin >> newDriver.WOFyyyy;
+
+        if (cin.fail() || !CheckDate(newDriver.WOFdd, newDriver.WOFmm))
+        {
+            cin.clear();
+            cin.ignore();
+            cout << " Invalid date. Please fill again." << endl << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
     if (newDriver.WOFyyyy < 2023)
     {
         cout << " Sorry. Your car is unfit for driving. Please get updated warrrent of fitness(WOF) check." << endl;
