@@ -9,6 +9,7 @@
 
 using namespace std;
 vector<Journey> journey;
+// vector<Driver> drivers;
 
 // function for trip booking
 void TripBooking(const string* email)
@@ -82,10 +83,12 @@ void TripBooking(const string* email)
             if (cus.paymentMethod == 2)
             {
                 cout << " Payment Status : Pending" << endl; // customer pay in cash
+                newTrip.payStatus = false;
             }
             else if (cus.paymentMethod == 1)
             {
                 cout << " Payment Status : Paid" << endl; // customer paid in card
+                newTrip.payStatus = true;
             }
         }
         
@@ -109,7 +112,19 @@ void PrintBill(long int tripID)
         {
             cout << "\n Your Receipt" << endl;
             cout << "-----------------------------------------------------------------------------" << endl;
-            cout << " Trip ID           : " << trip.tripID << endl;
+            cout << " Trip ID           : " << trip.tripID << endl;            
+            
+            if (!trip.driverstatus)
+            {
+                cout << " Driver Name       : searching for driver...." << endl;
+                cout << " Cab Plate Number  : searching for driver...." << endl;
+            }
+            else
+            {
+                cout << " Driver Name       : " << trip.driverName << endl;
+                cout << " Cab Plate Number  : " << trip.licensePlate << endl;
+            }
+
             cout << " Pick up location  : " << trip.tripStart << endl;
             cout << " Drop off location : " << trip.tripEnd << endl;
             cout << " Booking Date      : " << trip.bookingDate << endl;
@@ -218,4 +233,66 @@ void CancelBooking(const string* email)
             cin.get();
         }
     }
+}
+
+void DriverDriveNow(const string* email)
+{
+    cin.ignore();
+    cout << "\n Your Trip Information " << endl;
+    cout << " ------------------------------------" << endl;
+    // check for available trips
+    bool tripsAvailable = false;
+    for (auto& trip : journey)
+    {
+        if (!tripsAvailable && trip.tripStatus)
+        {
+            trip.assigned = true;
+            tripsAvailable = true;
+            trip.driverstatus = true;
+
+            cout << " Trip ID              : " << trip.tripID << endl;
+            cout << "\n Customer Name        : " << trip.customerName << endl;
+            cout << " Pick Up Location     : " << trip.tripStart << endl;
+            cout << " Drop Off Location    : " << trip.tripEnd << endl;
+            cout << " Booking Date         : " << trip.bookingDate << endl;
+            cout << " Booking Time         : " << trip.bookingTime << endl;
+            cout << " Number of Passengers : " << trip.passengers << endl;
+            cout << " Number of Luggages   : " << trip.luggage << endl;
+
+            if (trip.specialN == 1)
+                cout << " Special Request      : None " << endl << endl;
+            else if (trip.specialN == 2)
+                cout << " Special Request      : Passenger has a baby " << endl << endl;
+            else if (trip.specialN == 3)
+                cout << " Special Request      : Passenger needs special aid " << endl << endl;
+            else
+                cout << " Special Request      : None " << endl << endl;
+
+            if(trip.payStatus == true)
+                cout << " Payment Status       : Paid " << endl << endl;
+            else
+                cout << " Payment Status       : Pending (Please collect from the customer.) " << endl << endl;
+
+            // assigning to certain driver ID
+            for (auto& driver : drivers)
+            {
+                if (driver.email == *email)
+                {
+                    trip.driverID = driver.driverID;
+                    trip.driverName = driver.firstName;
+                    trip.licensePlate = driver.licensePlate;
+                }
+            }
+        }
+
+        cout << " Press Enter to go back." << endl;
+        cin.get();
+    }
+    if (!tripsAvailable)
+    {
+        cout << "\n There are no available trips yet. " << endl << endl;
+        cout << " Press Enter to go back." << endl;
+        cin.get();
+    }
+
 }

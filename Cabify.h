@@ -28,26 +28,26 @@ struct Driver
     int age;
     int drivingExp;                // driving experience
     int carYear;                   // car production year
-    int WOFdd, WOFmm, WOFyyyy;     // WOF info 
-    std::string WOF;
+    int WOFdd, WOFmm, WOFyyyy;
+    std::string WOFexpire;
     std::string carModel;          // eg - Toyota Prius
     std::string licensePlate;      // car license plate number
     std::string firstName;
     std::string lastName;
     std::string fullName;
     int gender;
-    int dd, mm, yyyy;              // dob info
     std::string dob;
     std::string nationality;
-    std::string licenseNum;        // driver license num
-    int Ldd, Lmm, Lyyyy;           // license expire date info
-    std::string licenseExpire;     // license expire date
+    std::string D_licenseNum;       // driver license num
+    std::string D_licenseVersion;
+    int Ldd, Lmm, Lyyyy;            // get license date
+    std::string licenseExpireDate;      // license expire date
     std::string email;
     std::string address;
     std::string phone;
     std::string bankAcc;
     std::string bankName;
-    int EndorsementNum;            // randomNumberGeneration
+    std::string driverID;                   // ID start from 001
 };
 
 extern std::vector<Driver> drivers;
@@ -58,7 +58,7 @@ enum SpecialNeeds { none = 1, infant , physicalNeeds };
 // struct for trip booking
 struct Journey
 {
-    long long int tripID = 0;
+    long int tripID = 0;
     std::string customerName;
     std::string tripStart;
     std::string tripEnd;
@@ -67,8 +67,13 @@ struct Journey
     int passengers = 0;
     SpecialNeeds specialN;
     int luggage = 0;
-    int payStatus = 0;
+    bool payStatus;
     bool tripStatus = true;
+    bool assigned;             // trip assigned to driver status
+    std::string driverID;
+    std::string driverName;
+    std::string licensePlate;
+    bool driverstatus = false;
 };
 
 extern std::vector<Journey> journey;
@@ -94,6 +99,7 @@ void ClearScreen();
 void TripBooking(const std::string* email);
 void PrintBill(long int tripID);
 void CancelBooking(const std::string* email);
+void DriverDriveNow(const std::string* email);  // getting trip for driver
 
 // customer - CustomerFunctions.cpp
 void NewAcc();
@@ -109,6 +115,7 @@ void ExistingDriverAcc();
 void adminLogin();
 void adminMenu();
 void customerInformation();
+void driverInformation();
 void TripInformation();
 
 #endif 

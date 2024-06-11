@@ -44,14 +44,9 @@ void NewAcc()
         }
         else
         {
-            break; // exit loop if email is unique
+            break; // if email is unique, exit
         }
     }
-    /*
-    cout << " Email : ";
-    cin.ignore(); // clear input buffer
-    getline(cin, newCus.email);
-    */
 
     cout << " First Name : ";
     getline(cin, newCus.firstName);   // use getline to read entire line (including space)
@@ -123,7 +118,7 @@ void ExistingAcc()
             while (true)
             {
                 ClearScreen();
-                cout << " \n Welcome " << cus.firstName << " .";
+                cout << " \n Kia Ora " << cus.firstName << " .";
                 cout << " What can we do for you today? " << endl << endl;
                 cout << " 1. Book a cab" << endl;
                 cout << " 2. Cancel Booking" << endl;
@@ -185,6 +180,16 @@ void ExistingAcc()
                             if (cus.firstName == trip.customerName)
                             {
                                 cout << " Trip ID           : " << trip.tripID << endl;
+                                if (!trip.driverstatus)
+                                {
+                                    cout << " Driver Name       : searching for driver...." << endl;
+                                    cout << " Cab Plate Number  : searching for driver...." << endl;
+                                }
+                                else
+                                {
+                                    cout << " Driver Name       : " << trip.driverName << endl;
+                                    cout << " Cab Plate Number  : " << trip.licensePlate << endl;
+                                }
                                 cout << " Pick up location  : " << trip.tripStart << endl;
                                 cout << " Drop off location : " << trip.tripEnd << endl;
                                 cout << " Booking Date      : " << trip.bookingDate << endl;
@@ -201,9 +206,9 @@ void ExistingAcc()
                                     cout << " Special Request   : None " << endl;
 
                                 if (trip.tripStatus == true)
-                                    cout << " Trip Status : Completed" << endl << endl;
+                                    cout << " Trip Status       : Completed" << endl << endl;
                                 else
-                                    cout << " Trip Status : Cancelled" << endl << endl;
+                                    cout << " Trip Status       : Cancelled" << endl << endl;
 
                                 tripexist = 1;
                             }
@@ -249,7 +254,7 @@ void BookCab()
 {
     while (true)
     {
-        cout << "\n Please choose from following options to proceed with your booking." << endl << endl;
+        cout << "\n Kia Ora. Please choose from following options to proceed with your booking." << endl << endl;
         cout << " 1. Register (I'm new customer)" << endl;
         cout << " 2. Login (I have an account)" << endl;
         cout << " 3. Back" << endl;

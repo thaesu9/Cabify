@@ -29,12 +29,15 @@ int main()
         switch (choice)
         {
         case 1:
+            // customer 
             ClearScreen();
             BookCab();
             break;
 
         case 2:
             // driver
+            ClearScreen();
+            DriverMainMenu();
             break;
 
         case 3:
