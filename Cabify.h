@@ -22,6 +22,37 @@ struct Customer
 extern std::vector<Customer> customers; // store customers information in vector
 // extern to avoid multiple definition error
 
+// struct for driver
+struct Driver
+{
+    int age;
+    int drivingExp;                // driving experience
+    int carYear;                   // car production year
+    int WOFdd, WOFmm, WOFyyyy;     // WOF info 
+    std::string WOF;
+    std::string carModel;          // eg - Toyota Prius
+    std::string licensePlate;      // car license plate number
+    std::string firstName;
+    std::string lastName;
+    std::string fullName;
+    int gender;
+    int dd, mm, yyyy;              // dob info
+    std::string dob;
+    std::string nationality;
+    std::string licenseNum;        // driver license num
+    int Ldd, Lmm, Lyyyy;           // license expire date info
+    std::string licenseExpire;     // license expire date
+    std::string email;
+    std::string address;
+    std::string phone;
+    std::string bankAcc;
+    std::string bankName;
+    int EndorsementNum;            // randomNumberGeneration
+};
+
+extern std::vector<Driver> drivers;
+
+// enumerated - trip booking
 enum SpecialNeeds { none = 1, infant , physicalNeeds };
 
 // struct for trip booking
@@ -69,6 +100,10 @@ void NewAcc();
 void ExistingAcc();
 void BookCab(); // main menu
 
+// driver - DriverFunctionss.cpp
+void DriverMainMenu();
+void NewDriverAcc();
+void ExistingDriverAcc();
 
 // admin - Admin.cpp
 void adminLogin();

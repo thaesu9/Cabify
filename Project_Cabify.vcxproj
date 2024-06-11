@@ -129,6 +129,7 @@
   <ItemGroup>
     <ClCompile Include="Admin.cpp" />
     <ClCompile Include="CustomerFunctions.cpp" />
+    <ClCompile Include="DriverFunctions.cpp" />
     <ClCompile Include="Logo.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Project_Cabify.cpp" />

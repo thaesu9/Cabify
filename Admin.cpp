@@ -265,6 +265,7 @@ void TripInformation()
 				cout << " Booking Date      : " << trip.bookingDate << endl;
 				cout << " Booking Time      : " << trip.bookingTime << endl;
 				cout << " Total Passengers  : " << trip.passengers << endl;
+				cout << " Total Luggages    : " << trip.luggage << endl;
 
 				if (trip.specialN == 1)
 					cout << " Special Request   : None " << endl;
@@ -310,6 +311,7 @@ void TripInformation()
 						cout << " Booking Date      : " << trip.bookingDate << endl;
 						cout << " Booking Time      : " << trip.bookingTime << endl;
 						cout << " Total Passengers  : " << trip.passengers << endl;
+						cout << " Total Luggages    : " << trip.luggage << endl;
 
 						if (trip.specialN == 1)
 							cout << " Special Request   : None " << endl;

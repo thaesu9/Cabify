@@ -29,6 +29,8 @@ void TripBooking(const string* email)
     getline(cin, newTrip.bookingTime);
     cout << " Number of Passengers : ";
     cin >> newTrip.passengers;
+    cout << " Number of Luggages : ";
+    cin >> newTrip.luggage;
 
     // special needs
     int aidChoice;
@@ -112,7 +114,8 @@ void PrintBill(long int tripID)
             cout << " Drop off location : " << trip.tripEnd << endl;
             cout << " Booking Date      : " << trip.bookingDate << endl;
             cout << " Booking Time      : " << trip.bookingTime << endl;
-            cout << " Total Passengers  : " << trip.passengers << endl;           
+            cout << " Total Passengers  : " << trip.passengers << endl;        
+            cout << " Total Luggages    : " << trip.luggage << endl;
 
             if (trip.specialN == 1)
                 cout << " Special Request   : None " << endl << endl;

@@ -14,13 +14,13 @@ void ClearScreen()
 // Main Menu
 void MainMenu(int* choice)
 {
-    cout << "\n Please choose ONE option from below." << endl;
+    cout << "\n Kia Ora. Please choose ONE option from below." << endl;
     cout << " (By making a choice, you agree to our terms and conditions.)" << endl << endl;
     cout << " 1. Book a Cab. (Customer)" << endl;
     cout << " 2. Drive for Cabify. (Driver)" << endl;
     cout << " 3. Check Terms and Conditions." << endl;
     cout << " 4. Exit." << endl;
-    // cout << " 5. Login as Admin" << endl;
+    // cout << " 0. Login as Admin" << endl;
 
     cout << "\n Choice: ";
     cin >> *choice;
