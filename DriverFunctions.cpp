@@ -4,6 +4,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "Cabify.h"
 
@@ -21,6 +22,50 @@ bool CheckDate(int day, int month)
         return false;
     
     return true;
+}
+
+void DriverFile(const Driver& driver)
+{
+    fstream driverFile;
+    driverFile.open("driver.txt", ios::app);
+
+    if (driverFile.is_open())
+    {
+        driverFile << " Cabify ID       : " << driver.driverID << endl;
+        driverFile << " Name            : " << driver.fullName << endl;
+        driverFile << " Age             : " << driver.age << endl;
+        driverFile << " Date of birth   : " << driver.dob << endl;
+
+        if (driver.gender == 1)
+            driverFile << " Gender          : Male " << endl;
+        else if (driver.gender == 2)
+            driverFile << " Gender          : Female " << endl;
+        else if (driver.gender == 3)
+            driverFile << " Gender          : Gender Diverse " << endl;
+        else
+            driverFile << " Gender          : Nil " << endl;
+
+        driverFile << " Nationality     : " << driver.nationality << endl;
+        driverFile << " Email           : " << driver.email << endl;
+        driverFile << " Contact Number  : " << driver.phone << endl;
+        driverFile << " Address         : " << driver.address << endl << endl;
+        driverFile << " Driving Experience : " << driver.drivingExp << " years" << endl;
+        driverFile << " Driver License     : " << driver.D_licenseNum << endl;
+        driverFile << " License Version    : " << driver.D_licenseVersion << endl;
+        driverFile << " License Expiry     : " << driver.licenseExpireDate << endl << endl;
+        driverFile << " Bank Account       : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl;
+
+        driverFile << "\n Vehicle Details of Driver ID " << driver.driverID << endl;
+        driverFile << " -----------------------------------------" << endl;
+        driverFile << " Car Model           : " << driver.carModel << endl;
+        driverFile << " Car Licence Plate   : " << driver.licensePlate << endl;
+        driverFile << " Car Production Year : " << driver.carYear << endl;
+        driverFile << " WOF Expiry Date     : " << driver.WOFexpire << endl << endl;
+        driverFile << " -----------------------------------------" << endl;
+
+        driverFile << endl;
+        driverFile.close();
+    }
 }
 
 // function for new driver account
@@ -152,10 +197,10 @@ void NewDriverAcc()
     // license expire date check
     while(true)
     {
-        cout << " Driving License Expiry Date (DD/MM/YYYY) : " << endl;
-        cout << " DD   : "; cin >> newDriver.Ldd;
-        cout << " MM   : "; cin >> newDriver.Lmm;
-        cout << " YYYY : "; cin >> newDriver.Lyyyy;
+        cout << " Driving License Expiry Date : " << endl;
+        cout << " Day  : "; cin >> newDriver.Ldd;
+        cout << " Month: "; cin >> newDriver.Lmm;
+        cout << " Year : "; cin >> newDriver.Lyyyy;
 
         if (cin.fail() || !CheckDate(newDriver.Ldd, newDriver.Lmm))
         {
@@ -217,10 +262,10 @@ void NewDriverAcc()
     // WOF date check
     while (true)
     {
-        cout << " Warrent of Fitness (WOF) Expiry Date (DD/MM/YYYY) : " << endl;
-        cout << " DD   : "; cin >> newDriver.WOFdd;
-        cout << " MM   : "; cin >> newDriver.WOFmm;
-        cout << " YYYY : "; cin >> newDriver.WOFyyyy;
+        cout << " Warrent of Fitness (WOF) Expiry Date : " << endl;
+        cout << " Day  : "; cin >> newDriver.WOFdd;
+        cout << " Month: "; cin >> newDriver.WOFmm;
+        cout << " Year : "; cin >> newDriver.WOFyyyy;
 
         if (cin.fail() || !CheckDate(newDriver.WOFdd, newDriver.WOFmm))
         {
@@ -248,6 +293,9 @@ void NewDriverAcc()
     }
 
     drivers.push_back(newDriver);
+
+    // file input
+    DriverFile(newDriver);
 
     ClearScreen();
     cout << "\n Thank you for driving with Cabify. You can start driving now." << endl;

@@ -7,6 +7,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "Cabify.h"
 
@@ -18,6 +19,19 @@ Admin adm;
 
 int main()
 {
+    // to clear the file after every run
+    fstream CustomerFile("customer.txt", ios::out);
+    if (CustomerFile.is_open())
+    {
+        CustomerFile.close();
+    }
+
+    fstream DriverFile("driver.txt", ios::out);
+    if (DriverFile.is_open())
+    {
+        DriverFile.close();
+    }
+
     CabifyLogo();
     int choice;
 

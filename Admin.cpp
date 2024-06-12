@@ -158,7 +158,7 @@ void customerInformation()
 						{
 							cout << " Payment Method : Card" << endl;
 						}
-						cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl;
+						cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
 
 
 						cout << "\n Press Enter to go back." << endl;
@@ -205,7 +205,7 @@ void customerInformation()
 						{
 							cout << " Payment Method : Card" << endl;
 						}
-						cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl;
+						cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
 
 
 						cout << "\n Press Enter to go back." << endl;
@@ -242,7 +242,7 @@ void customerInformation()
 				{
 					cout << " Payment Method : Card" << endl;
 				}
-				cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl << endl;
+				cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl << endl;
 				cout << " -----------------------------------------" << endl << endl;
 			}
 			cout << "\n Press Enter to go back." << endl;
@@ -305,6 +305,7 @@ void driverInformation()
 						cout << " -----------------------------------------" << endl;
 						cout << " Cabify ID       : " << driver.driverID << endl;
 						cout << " Name            : " << driver.fullName << endl;
+						cout << " Age             : " << driver.age << endl;
 						cout << " Date of birth   : " << driver.dob << endl;
 
 						if (driver.gender == 1)
@@ -320,10 +321,11 @@ void driverInformation()
 						cout << " Email           : " << driver.email << endl;
 						cout << " Contact Number  : " << driver.phone << endl;
 						cout << " Address         : " << driver.address << endl << endl;
-						cout << " Driver License  : " << driver.D_licenseNum << endl;
-						cout << " License Version : " << driver.D_licenseVersion << endl;
-						cout << " License Expiry  : " << driver.licenseExpireDate << endl << endl;
-						cout << " Bank Account    : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl << endl;
+						cout << " Driving Experience : " << driver.drivingExp << endl;
+						cout << " Driver License     : " << driver.D_licenseNum << endl;
+						cout << " License Version    : " << driver.D_licenseVersion << endl;
+						cout << " License Expiry     : " << driver.licenseExpireDate << endl << endl;
+						cout << " Bank Account       : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl << endl;
 
 						cout << "\n Vehicle Details of Driver ID " << driver.driverID << endl;
 						cout << " -----------------------------------------" << endl;

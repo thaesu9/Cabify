@@ -4,6 +4,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "Cabify.h"
 
@@ -32,6 +33,32 @@ bool VisaCardCheck(const string& visaCard)
         }
     }
     return true;
+}
+
+// file handling function - save to customer file
+void CustomerFile(const Customer& cus)
+{
+    fstream customerFile;
+    customerFile.open("Customer.txt", ios::app); // append instead of out
+    
+    if (customerFile.is_open())
+    {
+        customerFile << " Name           : " << cus.fullName << endl;
+        customerFile << " Email          : " << cus.email << endl;
+        customerFile << " Contact Number : " << cus.phone << endl;
+        customerFile << " Address        : " << cus.address << endl;
+        if (cus.paymentMethod == 2)
+        {
+            customerFile << " Payment Method : Cash" << endl;
+        }
+        else if (cus.paymentMethod == 1)
+        {
+            customerFile << " Payment Method : Card" << endl;
+            customerFile << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
+        }
+        customerFile << endl;
+        customerFile.close();
+    }
 }
 
 // function for new account
@@ -129,6 +156,9 @@ void NewAcc()
 
     customers.push_back(newCus);  // add new customer in vector
 
+    // file handling
+    CustomerFile(newCus);
+
     ClearScreen();
     cout << "\n Thank you for joining Cabify. You can now start your journey." << endl;
     cout << " Please login to proceed with your booking." << endl;
@@ -195,7 +225,7 @@ void ExistingAcc()
                     else if (cus.paymentMethod == 1)
                     {
                         cout << " Payment Method : Card" << endl;
-                        cout << " Visa Card      : " << cus.visaCard << "(" << cus.visaExp << ")" << endl;
+                        cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
                     }
 
                     cin.ignore();
@@ -329,4 +359,5 @@ void BookCab()
         }
     }
 }
+
 
