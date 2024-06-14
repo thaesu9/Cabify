@@ -321,7 +321,7 @@ void driverInformation()
 						cout << " Email           : " << driver.email << endl;
 						cout << " Contact Number  : " << driver.phone << endl;
 						cout << " Address         : " << driver.address << endl << endl;
-						cout << " Driving Experience : " << driver.drivingExp << endl;
+						cout << " Driving Experience : " << driver.drivingExp << " years" << endl;
 						cout << " Driver License     : " << driver.D_licenseNum << endl;
 						cout << " License Version    : " << driver.D_licenseVersion << endl;
 						cout << " License Expiry     : " << driver.licenseExpireDate << endl << endl;
@@ -404,7 +404,7 @@ void driverInformation()
 				}
 				if (!found)
 				{
-					cout << "\n Customer information not found. Press Enter to go back." << endl;
+					cout << "\n Driver information not found. Press Enter to go back." << endl;
 					cin.get();
 					ClearScreen();
 				}

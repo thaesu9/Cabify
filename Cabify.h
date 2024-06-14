@@ -107,6 +107,7 @@ void ExistingAcc();
 void BookCab(); // main menu
 
 // driver - DriverFunctionss.cpp
+bool CheckDate(int day, int month, int year);  // to check valid date
 void DriverMainMenu();
 void NewDriverAcc();
 void ExistingDriverAcc();

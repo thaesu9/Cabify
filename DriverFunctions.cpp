@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream> // istringstream
 #include <vector>
 #include <math.h>
 #include <cstdlib>
@@ -12,17 +13,6 @@ using namespace std;
 
 vector<Driver> drivers;
 
-// check if it is valid date
-bool CheckDate(int day, int month) 
-{
-    if (month < 1 || month > 12) 
-        return false;
-    
-    if (day < 1 || day > 31) 
-        return false;
-    
-    return true;
-}
 
 void DriverFile(const Driver& driver)
 {
@@ -145,12 +135,6 @@ void NewDriverAcc()
         }
     }
 
-    // Driver ID
-    static int IDnum = 1;  // initialize driver ID count start from 1
-    int driverID = IDnum++; // increase if 1 already exist
-    newDriver.driverID = to_string(driverID); // convert to string to convert to 0001
-    newDriver.driverID.insert(newDriver.driverID.begin(), 4 - newDriver.driverID.length(), '0');  // convert to 0001
-
     cout << " First Name : ";
     getline(cin, newDriver.firstName);   // use getline to read entire line (including space)
     cout << " Last Name : ";
@@ -176,8 +160,29 @@ void NewDriverAcc()
     }
     cin.ignore(); // ignore previous cin
 
-    cout << " Date of birth (DD/MM/YYYY) : ";
-    getline(cin, newDriver.dob);
+    while (true)
+    {
+        string date;
+        cout << " Date of birth (DD/MM/YYYY) : ";
+        getline(cin, date);
+
+        istringstream Date(date);
+        int dd, mm, yyyy;
+        char slash1, slash2;
+
+        if (Date >> dd >> slash1 >> mm >> slash2 >> yyyy)
+        {
+            if (slash1 == '/' && slash2 == '/' && CheckDate(dd, mm, yyyy))
+            {
+                newDriver.dob = to_string(dd) + "/" + to_string(mm) + "/" + to_string(yyyy);
+                break;
+            }
+            else
+            {
+                cout << " Invalid date. Please fill again." << endl << endl;
+            }
+        }
+    }
 
     cout << " Nationality : ";
     getline(cin, newDriver.nationality);
@@ -197,27 +202,30 @@ void NewDriverAcc()
     // license expire date check
     while(true)
     {
-        cout << " Driving License Expiry Date : " << endl;
-        cout << " Day  : "; cin >> newDriver.Ldd;
-        cout << " Month: "; cin >> newDriver.Lmm;
-        cout << " Year : "; cin >> newDriver.Lyyyy;
+        string date;
+        cout << " Driving License Expiry Date : ";
+        getline(cin, date);
 
-        if (cin.fail() || !CheckDate(newDriver.Ldd, newDriver.Lmm))
+        istringstream Date(date);
+        char slash1, slash2;
+
+        if (Date >> newDriver.Ldd >> slash1 >> newDriver.Lmm >> slash2 >> newDriver.Lyyyy)
         {
-            cin.clear();
-            cin.ignore();
-            cout << " Invalid date. Please fill again." << endl << endl;
-        }
-        else
-        {
-            break;
+            if (slash1 == '/' && slash2 == '/' && CheckDate(newDriver.Ldd, newDriver.Lmm, newDriver.Lyyyy))
+            {
+                break;
+            }
+            else
+            {
+                cout << " Invalid date. Please fill again." << endl << endl;
+            }
         }
     }
     
     if (newDriver.Lyyyy < 2023)
     {
         cout << " Sorry. Your driving license is expired. You cannot drive for Cabify." << endl;
-        cin.ignore();
+        // cin.ignore();
         cout << "\n Press Enter to go back." << endl;
         cin.get();
         ClearScreen();
@@ -228,7 +236,7 @@ void NewDriverAcc()
         newDriver.licenseExpireDate = to_string(newDriver.Ldd) + "/" + to_string(newDriver.Lmm) + "/" + to_string(newDriver.Lyyyy);
     }
 
-    cin.ignore();
+    // cin.ignore();
     cout << " Bank Account Number : ";
     getline(cin, newDriver.bankAcc);
 
@@ -249,7 +257,7 @@ void NewDriverAcc()
 
     cout << " Car Production Year : ";
     cin >> newDriver.carYear;
-    if (newDriver.carYear < 1990)
+    if (newDriver.carYear < 1990 || newDriver.carYear > 2024)
     {
         cout << " Sorry. Your car is unfit for driving. You cannot drive for Cabify with car production year older than 1990." << endl;
         cin.ignore();
@@ -259,29 +267,33 @@ void NewDriverAcc()
         return;     // go back to main menu 
     }
 
+    cin.ignore();
     // WOF date check
     while (true)
     {
-        cout << " Warrent of Fitness (WOF) Expiry Date : " << endl;
-        cout << " Day  : "; cin >> newDriver.WOFdd;
-        cout << " Month: "; cin >> newDriver.WOFmm;
-        cout << " Year : "; cin >> newDriver.WOFyyyy;
+        string date;
+        cout << " Warrant of Fitness (WOF) Expiry Date : ";
+        getline(cin, date);
 
-        if (cin.fail() || !CheckDate(newDriver.WOFdd, newDriver.WOFmm))
+        istringstream Date(date);
+        char slash1, slash2;
+
+        if (Date >> newDriver.WOFdd >> slash1 >> newDriver.WOFmm >> slash2 >> newDriver.WOFyyyy)
         {
-            cin.clear();
-            cin.ignore();
-            cout << " Invalid date. Please fill again." << endl << endl;
-        }
-        else
-        {
-            break;
+            if (slash1 == '/' && slash2 == '/' && CheckDate(newDriver.Ldd, newDriver.Lmm, newDriver.Lyyyy))
+            {
+                break;
+            }
+            else
+            {
+                cout << " Invalid date. Please fill again." << endl << endl;
+            }
         }
     }
     if (newDriver.WOFyyyy < 2023)
     {
         cout << " Sorry. Your car is unfit for driving. Please get updated warrrent of fitness(WOF) check." << endl;
-        cin.ignore();
+        // cin.ignore();
         cout << "\n Press Enter to go back." << endl;
         cin.get();
         ClearScreen();
@@ -292,10 +304,21 @@ void NewDriverAcc()
         newDriver.WOFexpire = to_string(newDriver.WOFdd) + "/" + to_string(newDriver.WOFmm) + "/" + to_string(newDriver.WOFyyyy);
     }
 
+
+    // Driver ID
+    static int IDnum = 1;  // initialize driver ID count start from 1
+    int driverID = IDnum++; // increase if 1 already exist
+    newDriver.driverID = to_string(driverID); // convert to string to convert to 0001
+    newDriver.driverID.insert(newDriver.driverID.begin(), 4 - newDriver.driverID.length(), '0');  // convert to 0001
+
     drivers.push_back(newDriver);
 
     // file input
     DriverFile(newDriver);
+
+    cout << "\n Thank you for registering with Cabify. Press Enter to go back." << endl;
+    cin.get();
+    ClearScreen();
 
     ClearScreen();
     cout << "\n Thank you for driving with Cabify. You can start driving now." << endl;

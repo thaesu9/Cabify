@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <sstream> // istringstream
 #include <vector>
 #include <math.h>
 #include <cstdlib>
@@ -42,8 +43,31 @@ void TripBooking(const string* email)
     getline(cin, newTrip.tripStart);
     cout << " Enter your destination : ";
     getline(cin, newTrip.tripEnd);
-    cout << " Booking Date (DD/MM/YYYY) : ";
-    getline(cin, newTrip.bookingDate);
+
+    while (true)
+    {
+        string date;
+        cout << " Booking Date (DD/MM/YYYY) : ";
+        getline(cin, date);
+
+        istringstream Date(date);
+        int dd, mm, yyyy;
+        char slash1, slash2;
+
+        if (Date >> dd >> slash1 >> mm >> slash2 >> yyyy)
+        {
+            if (slash1 == '/' && slash2 == '/' && CheckDate(dd, mm, yyyy))
+            {
+                newTrip.bookingDate = to_string(dd) + "/" + to_string(mm) + "/" + to_string(yyyy);
+                break;
+            }
+            else
+            {
+                cout << " Invalid date. Please fill again." << endl << endl;
+            }
+        }
+    }
+
     cout << " Booking Time (00:00 am/pm) : ";
     getline(cin, newTrip.bookingTime);
     cout << " Number of Passengers : ";
