@@ -13,7 +13,6 @@ using namespace std;
 
 vector<Driver> drivers;
 
-
 void DriverFile(const Driver& driver)
 {
     fstream driverFile;
@@ -163,7 +162,7 @@ void NewDriverAcc()
     while (true)
     {
         string date;
-        cout << " Date of birth (DD/MM/YYYY) : ";
+        cout << " Date of birth (dd/mm/yyyy) : ";
         getline(cin, date);
 
         istringstream Date(date);
@@ -203,7 +202,7 @@ void NewDriverAcc()
     while(true)
     {
         string date;
-        cout << " Driving License Expiry Date : ";
+        cout << " Driving License Expiry Date (dd/mm/yyyy) : ";
         getline(cin, date);
 
         istringstream Date(date);
@@ -272,7 +271,7 @@ void NewDriverAcc()
     while (true)
     {
         string date;
-        cout << " Warrant of Fitness (WOF) Expiry Date : ";
+        cout << " Warrant of Fitness (WOF) Expiry Date (dd/mm/yyyy) : ";
         getline(cin, date);
 
         istringstream Date(date);

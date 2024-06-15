@@ -95,6 +95,9 @@ void MainMenu(int* choice);
 void TermsConditions();
 void ClearScreen();
 
+// Project_Cabify.cpp
+bool CheckDate(int day, int month, int year);  // to check valid date
+
 // trip - TripBooking.cpp
 void TripBooking(const std::string* email);
 void PrintBill(long int tripID);
@@ -107,7 +110,6 @@ void ExistingAcc();
 void BookCab(); // main menu
 
 // driver - DriverFunctionss.cpp
-bool CheckDate(int day, int month, int year);  // to check valid date
 void DriverMainMenu();
 void NewDriverAcc();
 void ExistingDriverAcc();
