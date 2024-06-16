@@ -1,0 +1,26 @@
+ Cabify ID       : 0001
+ Name            : b n
+ Age             : 23
+ Date of birth   : 12/3/1999
+ Gender          : Female 
+ Nationality     : 22
+ Email           : blossom
+ Contact Number  : 2
+ Address         : 2
+
+ Driving Experience : 2 years
+ Driver License     : 2
+ License Version    : 2
+ License Expiry     : 12/4/2029
+
+ Bank Account       : 222 (asb Bank)
+
+ Vehicle Details of Driver ID 0001
+ -----------------------------------------
+ Car Model           : tt
+ Car Licence Plate   : tt
+ Car Production Year : 2017
+ WOF Expiry Date     : 12/4/2029
+
+ -----------------------------------------
+

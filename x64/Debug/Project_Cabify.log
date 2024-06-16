@@ -1,9 +1,2 @@
-﻿  Admin.cpp
-  CustomerFunctions.cpp
-  DriverFunctions.cpp
-  Logo.cpp
-  MainMenu.cpp
-  Project_Cabify.cpp
-  TripBooking.cpp
-  Generating Code...
+﻿  DriverFunctions.cpp
   Project_Cabify.vcxproj -> D:\Users\270400075\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe

@@ -118,6 +118,14 @@ void NewDriverAcc()
                 break;
             }
         }
+        for (const auto& driver : drivers)
+        {
+            if (newDriver.email == driver.email)
+            {
+                emailExists = true;
+                break;
+            }
+        }
 
         if (emailExists)
         {

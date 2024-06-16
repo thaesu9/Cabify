@@ -83,6 +83,14 @@ void NewAcc()
                 break;
             }
         }
+        for (const auto& driver : drivers)
+        {
+            if (newCus.email == driver.email)
+            {
+                emailExists = true;
+                break;
+            }
+        }
 
         if (emailExists)
         {
