@@ -12,6 +12,7 @@ struct Customer
     std::string lastName;
     std::string fullName;
     std::string email;
+    std::string password;
     std::string address;
     std::string phone;
     int paymentMethod = 0;
@@ -43,6 +44,7 @@ struct Driver
     int Ldd, Lmm, Lyyyy;            // get license date
     std::string licenseExpireDate;      // license expire date
     std::string email;
+    std::string password;
     std::string address;
     std::string phone;
     std::string bankAcc;

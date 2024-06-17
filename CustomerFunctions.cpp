@@ -83,14 +83,6 @@ void NewAcc()
                 break;
             }
         }
-        for (const auto& driver : drivers)
-        {
-            if (newCus.email == driver.email)
-            {
-                emailExists = true;
-                break;
-            }
-        }
 
         if (emailExists)
         {
@@ -105,6 +97,13 @@ void NewAcc()
             break; // if email is unique, exit
         }
     }
+
+    cout << " Password : ";
+    getline(cin, newCus.password);
+
+    ClearScreen();
+    cout << "\n Customer Registration Page" << endl;
+    cout << " ---------------------------" << endl;
 
     cout << " First Name : ";
     getline(cin, newCus.firstName);   // use getline to read entire line (including space)
@@ -180,147 +179,181 @@ void ExistingAcc()
     cin.ignore();
 
     // find customer by email
-    string email;
-    cout << "\n Enter your email : ";
+    string email, password;
+    cout << "\n Email : ";
     getline(cin, email);
 
     bool found = 0;
-    for (const auto& cus : customers) // find in customers vector using struct
+    bool incorrectPW = 0; // for wrong password attempts
+    int attempt = 0;      // num of attempts
+    int maxAttempt = 10;
+
+    while(attempt < maxAttempt)
     {
-        if (cus.email == email)
+        cout << " Password : ";
+        getline(cin, password);
+
+        for (const auto& cus : customers) // find in customers vector using struct
         {
-            while (true)
+            if (cus.email == email)
             {
-                ClearScreen();
-                cout << " \n Kia Ora " << cus.firstName << " .";
-                cout << " What can we do for you today? " << endl << endl;
-                cout << " 1. Book a cab" << endl;
-                cout << " 2. Cancel Booking" << endl;
-                cout << " 3. View my Profile" << endl;
-                cout << " 4. My Bookings" << endl;
-                cout << " 5. Back" << endl;
-                int choice;
-                cout << "\n Choice : ";
-                cin >> choice;
-
-                switch (choice)
+                if(cus.password == password)
                 {
-                case 1:
-                    ClearScreen();
-                    // book a trip
-                    TripBooking(&email);
-                    break;
-
-                case 2:
-                    ClearScreen();
-                    //cancel booking
-                    CancelBooking(&email);
-                    break;
-
-                case 3:
-                    ClearScreen();
-                    // view profile
-                    cout << "\n Profile Details" << endl;
-                    cout << " -----------------------------" << endl;
-                    cout << " Name           : " << cus.fullName << endl;
-                    cout << " Email          : " << cus.email << endl;
-                    cout << " Contact Number : " << cus.phone << endl;
-                    cout << " Address        : " << cus.address << endl << endl;
-                    if (cus.paymentMethod == 2)
+                    found = 1;  // acc found
+                    while (true)
                     {
-                        cout << " Payment Method : Cash" << endl;
-                    }
-                    else if (cus.paymentMethod == 1)
-                    {
-                        cout << " Payment Method : Card" << endl;
-                        cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
-                    }
+                        ClearScreen();
+                        cout << " \n Kia Ora " << cus.firstName << " .";
+                        cout << " What can we do for you today? " << endl << endl;
+                        cout << " 1. Book a cab" << endl;
+                        cout << " 2. Cancel Booking" << endl;
+                        cout << " 3. View my Profile" << endl;
+                        cout << " 4. My Bookings" << endl;
+                        cout << " 0. Back" << endl;
+                        int choice;
+                        cout << "\n Choice : ";
+                        cin >> choice;
 
-                    cin.ignore();
-                    cout << "\n Press Enter to go back." << endl;
-                    cin.get();
-                    break;
-
-                case 4:
-                    ClearScreen();
-                    // view booking
-                    cout << "\n Booking history" << endl;
-                    cout << " -----------------------------" << endl;
-
-                    {
-                        bool tripexist = 0;
-                        for (const auto& trip : journey)
+                        switch (choice)
                         {
-                            if (cus.firstName == trip.customerName)
+                        case 1:
+                            ClearScreen();
+                            // book a trip
+                            TripBooking(&email);
+                            break;
+
+                        case 2:
+                            ClearScreen();
+                            //cancel booking
+                            CancelBooking(&email);
+                            break;
+
+                        case 3:
+                            ClearScreen();
+                            // view profile
+                            cout << "\n Profile Details" << endl;
+                            cout << " -----------------------------" << endl;
+                            cout << " Name           : " << cus.fullName << endl;
+                            cout << " Email          : " << cus.email << endl;
+                            cout << " Contact Number : " << cus.phone << endl;
+                            cout << " Address        : " << cus.address << endl << endl;
+                            if (cus.paymentMethod == 2)
                             {
-                                cout << " Trip ID           : " << trip.tripID << endl;
-                                if (!trip.driverstatus)
-                                {
-                                    cout << " Driver Name       : searching for driver...." << endl;
-                                    cout << " Cab Plate Number  : searching for driver...." << endl;
-                                }
-                                else
-                                {
-                                    cout << " Driver Name       : " << trip.driverName << endl;
-                                    cout << " Cab Plate Number  : " << trip.licensePlate << endl;
-                                }
-                                cout << " Pick up location  : " << trip.tripStart << endl;
-                                cout << " Drop off location : " << trip.tripEnd << endl;
-                                cout << " Booking Date      : " << trip.bookingDate << endl;
-                                cout << " Booking Time      : " << trip.bookingTime << endl;
-                                cout << " Total Passengers  : " << trip.passengers << endl;
-
-                                if (trip.specialN == 1)
-                                    cout << " Special Request   : None " << endl;
-                                else if (trip.specialN == 2)
-                                    cout << " Special Request   : I have a baby " << endl;
-                                else if (trip.specialN == 3)
-                                    cout << " Special Request   : I need special aid " << endl;
-                                else
-                                    cout << " Special Request   : None " << endl;
-
-                                if (trip.tripStatus == true)
-                                    cout << " Trip Status       : Completed" << endl << endl;
-                                else
-                                    cout << " Trip Status       : Cancelled" << endl << endl;
-
-                                tripexist = 1;
+                                cout << " Payment Method : Cash" << endl;
                             }
-                            if (!tripexist)
+                            else if (cus.paymentMethod == 1)
                             {
-                                cout << "\n You have no bookings yet." << endl << endl;
+                                cout << " Payment Method : Card" << endl;
+                                cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
                             }
 
+                            cin.ignore();
+                            cout << "\n Press Enter to go back." << endl;
+                            cin.get();
+                            break;
+
+                        case 4:
+                            ClearScreen();
+                            // view booking
+                            cout << "\n Booking history" << endl;
+                            cout << " -----------------------------" << endl;
+
+                            {
+                                bool tripexist = 0;
+                                for (const auto& trip : journey)
+                                {
+                                    if (cus.firstName == trip.customerName)
+                                    {
+                                        cout << " Trip ID           : " << trip.tripID << endl;
+                                        if (!trip.driverstatus)
+                                        {
+                                            cout << " Driver Name       : searching for driver...." << endl;
+                                            cout << " Cab Plate Number  : searching for driver...." << endl;
+                                        }
+                                        else
+                                        {
+                                            cout << " Driver Name       : " << trip.driverName << endl;
+                                            cout << " Cab Plate Number  : " << trip.licensePlate << endl;
+                                        }
+                                        cout << " Pick up location  : " << trip.tripStart << endl;
+                                        cout << " Drop off location : " << trip.tripEnd << endl;
+                                        cout << " Booking Date      : " << trip.bookingDate << endl;
+                                        cout << " Booking Time      : " << trip.bookingTime << endl;
+                                        cout << " Total Passengers  : " << trip.passengers << endl;
+
+                                        if (trip.specialN == 1)
+                                            cout << " Special Request   : None " << endl;
+                                        else if (trip.specialN == 2)
+                                            cout << " Special Request   : I have a baby " << endl;
+                                        else if (trip.specialN == 3)
+                                            cout << " Special Request   : I need special aid " << endl;
+                                        else
+                                            cout << " Special Request   : None " << endl;
+
+                                        if (trip.tripStatus == true)
+                                            cout << " Trip Status       : Completed" << endl << endl;
+                                        else
+                                            cout << " Trip Status       : Cancelled" << endl << endl;
+
+                                        tripexist = 1;
+                                    }
+                                    if (!tripexist)
+                                    {
+                                        cout << "\n You have no bookings yet." << endl << endl;
+                                    }
+
+                                }
+                            }
+
+                            cin.ignore();
+                            cout << "\n Press Enter to go back." << endl;
+                            cin.get();
+                            break;
+
+                        case 0:
+                            // return
+                            ClearScreen();
+                            return;
+
+                        default:
+                            ClearScreen();
+                            cout << "Invalid choice. Please choose again : ";
+                            break;
                         }
                     }
-
-                    cin.ignore();
-                    cout << "\n Press Enter to go back." << endl;
-                    cin.get();
-                    break;
-
-                case 5:
-                    ClearScreen();
-                    return;
-
-                default:
-                    ClearScreen();
-                    cout << "Invalid choice. Please choose again : ";
-                    break;
+                }
+                else
+                {
+                    incorrectPW = 1;
                 }
             }
-
-            found = 1;
+        }
+        if (found)
+        {
             break;
         }
+        else if (incorrectPW)
+        {
+            cout << "\n Incorrect password. Please try again." << endl;
+            incorrectPW = 0;
+            attempt++;
+        }
+        else
+        {
+            cout << "\n No account found. Press Enter to go back to register." << endl;
+            cin.get();
+            ClearScreen();
+            return;
+        }
     }
-    if (!found)
+    // if the login attempt becomes more than 10 times (maximum attempts)
+    if (!found && attempt >= maxAttempt)
     {
-        cout << "\n No account found. Press Enter to go back to register." << endl;
+        cout << "\n Invalid login. Too many failed password attempts.\n Please try again later." << endl;
         cin.get();
         ClearScreen();
     }
-
+    
 }
 
 // Booking screen main menu
@@ -331,8 +364,8 @@ void BookCab()
         cout << "\n Kia Ora. Please choose from following options to proceed with your booking." << endl << endl;
         cout << " 1. Register (I'm new customer)" << endl;
         cout << " 2. Login (I have an account)" << endl;
-        cout << " 3. Back" << endl;
-        cout << " 4. Exit" << endl;
+        cout << " 0. Back" << endl;
+        cout << " 9. Exit" << endl;
         int choiceB;
         cout << "\n Choice: ";
         cin >> choiceB;
@@ -349,12 +382,12 @@ void BookCab()
             ExistingAcc();
             break;
 
-        case 3:
+        case 0:
             // return to main menu
             ClearScreen();
             return;
             
-        case 4:
+        case 9:
             ClearScreen();
             cout << "\nThank you for using Cabify. Please come again." << endl;
             exit(0); // to entire exit and end the program

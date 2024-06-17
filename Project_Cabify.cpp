@@ -75,13 +75,13 @@ int main()
             TermsConditions();
             break;
 
-        case 4:
+        case 9:
             ClearScreen();
             cout << "Thank you for using Cabify. Have a nice day." << endl;
             cout << endl;
             return 0;
 
-        case 0:
+        case 6:
             // login as admin
             if(!adm.attemptFailed)
             {

@@ -141,6 +141,12 @@ void NewDriverAcc()
             break; // if email is unique, exit
         }
     }
+    cout << " Password : ";
+    getline(cin, newDriver.password);
+
+    ClearScreen();
+    cout << "\n Driver Registration Page" << endl;
+    cout << " ---------------------------" << endl;
 
     cout << " First Name : ";
     getline(cin, newDriver.firstName);   // use getline to read entire line (including space)
@@ -337,144 +343,178 @@ void ExistingDriverAcc()
     cin.ignore();
 
     // find driver account by email
-    string email;
-    cout << "\n Enter your email : ";
+    string email,password;
+    cout << "\n Email : ";
     getline(cin, email);
 
     bool found = 0;
-    for (const auto& driver : drivers) // find in customers vector using struct
+    bool incorrectPW = 0; // for wrong password attempts
+    int attempt = 0;      // num of attempts
+    int maxAttempt = 10;
+
+    while(attempt < maxAttempt)
     {
-        if (driver.email == email)
+        cout << " Password : ";
+        getline(cin, password);
+
+        for (const auto& driver : drivers) // find in customers vector using struct
         {
-            while (true)
+            if (driver.email == email)
             {
-                ClearScreen();
-                cout << "\n Kia Ora " << driver.firstName << " .";
-                cout << " What would you like to do? " << endl << endl;
-                cout << " 1. Drive now" << endl;
-                cout << " 2. View my Profile" << endl;
-                cout << " 3. View my Vehicle Profile" << endl;
-                cout << " 4. My Driving History" << endl;
-                cout << " 5. Back" << endl;
-                int choice;
-                cout << "\n Choice : ";
-                cin >> choice;
-
-                switch (choice)
+                if(driver.password == password)
                 {
-                case 1:
-                    ClearScreen();
-                    // drive now
-                    DriverDriveNow(&email);
-                    break;
-
-                case 2:
-                    ClearScreen();
-                    // View my profile
-                    cout << "\n Profile Details" << endl;
-                    cout << " -----------------------------" << endl;
-                    cout << " Cabify ID       : " << driver.driverID << endl;
-                    cout << " Name            : " << driver.fullName << endl;
-                    cout << " Date of birth   : " << driver.dob << endl;
-                    
-                    if (driver.gender == 1)
-                        cout << " Gender          : Male " << endl;
-                    else if (driver.gender == 2)
-                        cout << " Gender          : Female " << endl;
-                    else if (driver.gender == 3)
-                        cout << " Gender          : Gender Diverse " << endl;
-                    else
-                        cout << " Gender          : Nil " << endl;
-
-                    cout << " Nationality     : " << driver.nationality << endl;
-                    cout << " Email           : " << driver.email << endl;
-                    cout << " Contact Number  : " << driver.phone << endl;
-                    cout << " Address         : " << driver.address << endl << endl;
-                    cout << " Driver License  : " << driver.D_licenseNum << endl;
-                    cout << " License Version : " << driver.D_licenseVersion << endl;
-                    cout << " License Expiry  : " << driver.licenseExpireDate << endl << endl;
-                    cout << " Bank Account    : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl << endl;
-
-                    cin.ignore();
-                    cout << "\n Press Enter to go back." << endl;
-                    cin.get();
-                    break;
-
-                case 3:
-                    ClearScreen();
-                    // view vehicle profile
-                    cout << "\n Vehicle Details" << endl;
-                    cout << " -----------------------------" << endl;
-                    cout << " Car Model           : " << driver.carModel << endl;
-                    cout << " Car Licence Plate   : " << driver.licensePlate << endl;
-                    cout << " Car Production Year : " << driver.carYear << endl;
-                    cout << " WOF Expiry Date     : " << driver.WOFexpire << endl << endl;
-
-                    cin.ignore();
-                    cout << "\n Press Enter to go back." << endl;
-                    cin.get();
-                    break;
-
-                case 4:
-                    ClearScreen();
-                    // view driving history
-                    cout << "\n Driving history" << endl;
-                    cout << " -----------------------------" << endl;
+                    found = 1; // acc found
+                    while (true)
                     {
-                        bool found = 0;
-                        for (const auto& trip : journey)
+                        ClearScreen();
+                        cout << "\n Kia Ora " << driver.firstName << " .";
+                        cout << " What would you like to do? " << endl << endl;
+                        cout << " 1. Drive now" << endl;
+                        cout << " 2. View my Profile" << endl;
+                        cout << " 3. View my Vehicle Profile" << endl;
+                        cout << " 4. My Driving History" << endl;
+                        cout << " 0. Back" << endl;
+                        int choice;
+                        cout << "\n Choice : ";
+                        cin >> choice;
+
+                        switch (choice)
                         {
-                            if (driver.firstName == trip.driverName)
+                        case 1:
+                            ClearScreen();
+                            // drive now
+                            DriverDriveNow(&email);
+                            break;
+
+                        case 2:
+                            ClearScreen();
+                            // View my profile
+                            cout << "\n Profile Details" << endl;
+                            cout << " -----------------------------" << endl;
+                            cout << " Cabify ID       : " << driver.driverID << endl;
+                            cout << " Name            : " << driver.fullName << endl;
+                            cout << " Date of birth   : " << driver.dob << endl;
+
+                            if (driver.gender == 1)
+                                cout << " Gender          : Male " << endl;
+                            else if (driver.gender == 2)
+                                cout << " Gender          : Female " << endl;
+                            else if (driver.gender == 3)
+                                cout << " Gender          : Gender Diverse " << endl;
+                            else
+                                cout << " Gender          : Nil " << endl;
+
+                            cout << " Nationality     : " << driver.nationality << endl;
+                            cout << " Email           : " << driver.email << endl;
+                            cout << " Contact Number  : " << driver.phone << endl;
+                            cout << " Address         : " << driver.address << endl << endl;
+                            cout << " Driver License  : " << driver.D_licenseNum << endl;
+                            cout << " License Version : " << driver.D_licenseVersion << endl;
+                            cout << " License Expiry  : " << driver.licenseExpireDate << endl << endl;
+                            cout << " Bank Account    : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl << endl;
+
+                            cin.ignore();
+                            cout << "\n Press Enter to go back." << endl;
+                            cin.get();
+                            break;
+
+                        case 3:
+                            ClearScreen();
+                            // view vehicle profile
+                            cout << "\n Vehicle Details" << endl;
+                            cout << " -----------------------------" << endl;
+                            cout << " Car Model           : " << driver.carModel << endl;
+                            cout << " Car Licence Plate   : " << driver.licensePlate << endl;
+                            cout << " Car Production Year : " << driver.carYear << endl;
+                            cout << " WOF Expiry Date     : " << driver.WOFexpire << endl << endl;
+
+                            cin.ignore();
+                            cout << "\n Press Enter to go back." << endl;
+                            cin.get();
+                            break;
+
+                        case 4:
+                            ClearScreen();
+                            // view driving history
+                            cout << "\n Driving history" << endl;
+                            cout << " -----------------------------" << endl;
                             {
-                                cout << " Trip ID           : " << trip.tripID << endl;
-                                cout << " Customer Name     : " << trip.customerName << endl;
-                                cout << " Pick Up Location     : " << trip.tripStart << endl;
-                                cout << " Drop Off Location    : " << trip.tripEnd << endl;
-                                cout << " Booking Date         : " << trip.bookingDate << endl;
-                                cout << " Booking Time         : " << trip.bookingTime << endl;
-                                cout << " Number of Passengers : " << trip.passengers << endl;
-                                cout << " Number of Luggages   : " << trip.luggage << endl;
+                                bool found = 0;
+                                for (const auto& trip : journey)
+                                {
+                                    if (driver.firstName == trip.driverName)
+                                    {
+                                        cout << " Trip ID           : " << trip.tripID << endl;
+                                        cout << " Customer Name     : " << trip.customerName << endl;
+                                        cout << " Pick Up Location     : " << trip.tripStart << endl;
+                                        cout << " Drop Off Location    : " << trip.tripEnd << endl;
+                                        cout << " Booking Date         : " << trip.bookingDate << endl;
+                                        cout << " Booking Time         : " << trip.bookingTime << endl;
+                                        cout << " Number of Passengers : " << trip.passengers << endl;
+                                        cout << " Number of Luggages   : " << trip.luggage << endl;
 
-                                if (trip.specialN == 1)
-                                    cout << " Special Request      : None " << endl << endl;
-                                else if (trip.specialN == 2)
-                                    cout << " Special Request      : Passenger has a baby " << endl << endl;
-                                else if (trip.specialN == 3)
-                                    cout << " Special Request      : Passenger needs special aid " << endl << endl;
-                                else
-                                    cout << " Special Request      : None " << endl << endl;
+                                        if (trip.specialN == 1)
+                                            cout << " Special Request      : None " << endl << endl;
+                                        else if (trip.specialN == 2)
+                                            cout << " Special Request      : Passenger has a baby " << endl << endl;
+                                        else if (trip.specialN == 3)
+                                            cout << " Special Request      : Passenger needs special aid " << endl << endl;
+                                        else
+                                            cout << " Special Request      : None " << endl << endl;
 
-                                if (trip.payStatus == true)
-                                    cout << " Payment Status       : Paid " << endl << endl;
-                                else
-                                    cout << " Payment Status       : Pending (Please collect from the customer.) " << endl << endl;
+                                        if (trip.payStatus == true)
+                                            cout << " Payment Status       : Paid " << endl << endl;
+                                        else
+                                            cout << " Payment Status       : Pending (Please collect from the customer.) " << endl << endl;
+                                    }
+                                }
                             }
+
+                            cin.ignore();
+                            cout << "\n Press Enter to go back." << endl;
+                            cin.get();
+                            break;
+
+                        case 0:
+                            // return menu
+                            ClearScreen();
+                            return;
+
+                        default:
+                            ClearScreen();
+                            cout << "Invalid choice. Please choose again : ";
+                            break;
                         }
                     }
-
-                    cin.ignore();
-                    cout << "\n Press Enter to go back." << endl;
-                    cin.get();
-                    break;
-
-                case 5:
-                    ClearScreen();
-                    return;
-
-                default:
-                    ClearScreen();
-                    cout << "Invalid choice. Please choose again : ";
-                    break;
+                }
+                else
+                {
+                    incorrectPW = 1;
                 }
             }
-
-            found = 1;
+        }
+        if (found)
+        {
             break;
         }
+        else if (incorrectPW)
+        {
+            cout << "\n Incorrect password. Please try again." << endl;
+            incorrectPW = 0;
+            attempt++;
+        }
+        else
+        {
+            cout << "\n No account found. Press Enter to go back to register." << endl;
+            cin.get();
+            ClearScreen();
+            return;
+        }
     }
-    if (!found)
+    // if the login attempt becomes more than 10 times (maximum attempts)
+    if (!found && attempt >= maxAttempt)
     {
-        cout << "\n No account found. Press Enter to go back to register." << endl;
+        cout << "\n Invalid login. Too many failed password attempts.\n Please try again later." << endl;
         cin.get();
         ClearScreen();
     }
@@ -487,8 +527,8 @@ void DriverMainMenu()
         cout << "\n Kia Ora. Please choose from following options to proceed." << endl << endl;
         cout << " 1. Register (I'm new driver)" << endl;
         cout << " 2. Login (I have an account)" << endl;
-        cout << " 3. Back" << endl;
-        cout << " 4. Exit" << endl;
+        cout << " 0. Back" << endl;
+        cout << " 9. Exit" << endl;
         int choiceB;
         cout << "\n Choice: ";
         cin >> choiceB;
@@ -505,12 +545,12 @@ void DriverMainMenu()
             ExistingDriverAcc();
             break;
 
-        case 3:
+        case 0:
             // return to main menu
             ClearScreen();
             return;
 
-        case 4:
+        case 9:
             ClearScreen();
             cout << "\nThank you for using Cabify. Please come again." << endl;
             exit(0); // to entire exit and end the program

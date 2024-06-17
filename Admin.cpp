@@ -60,8 +60,8 @@ void adminMenu()
 		cout << "\n 1. Customer information" << endl;
 		cout << " 2. Driver Information" << endl;
 		cout << " 3. Trip Information" << endl;
-		cout << " 4. Back" << endl;
-		cout << " 5. Exit" << endl;
+		cout << " 0. Back" << endl;
+		cout << " 9. Exit" << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -86,12 +86,12 @@ void adminMenu()
 			TripInformation();
 			break;
 
-		case 4:
+		case 0:
 			// back to main menu
 			ClearScreen();
 			return;
 
-		case 5:
+		case 9:
 			// exit
 			ClearScreen();
 			cout << "\nThank you for using Cabify. Please come again." << endl;
@@ -118,7 +118,7 @@ void customerInformation()
 		cout << "\n 1. Name" << endl;
 		cout << " 2. Email" << endl;
 		cout << " 3. View all customers " << endl;
-		cout << " 4. Back" << endl;
+		cout << " 0. Back" << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -251,7 +251,7 @@ void customerInformation()
 			ClearScreen();
 			break;
 
-		case 4:
+		case 0:
 			// back to previous menu
 			ClearScreen();
 			return;
@@ -275,7 +275,7 @@ void driverInformation()
 		cout << "\n 1. Name" << endl;
 		cout << " 2. Driver ID" << endl;
 		cout << " 3. View all drivers" << endl;
-		cout << " 4. Back" << endl;
+		cout << " 0. Back" << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -459,7 +459,7 @@ void driverInformation()
 			ClearScreen();
 			break;
 
-		case 4:
+		case 0:
 			// back to previous menu
 			ClearScreen();
 			return;
@@ -481,7 +481,7 @@ void TripInformation()
 		cout << "\n Trip Information " << endl;
 		cout << "\n 1. View all trips" << endl;
 		cout << " 2. Search by Trip ID" << endl;
-		cout << " 3. Back" << endl;
+		cout << " 0. Back" << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -584,7 +584,7 @@ void TripInformation()
 			}
 			break;
 
-		case 3:
+		case 0:
 			// back to previous menu
 			ClearScreen();
 			return;
