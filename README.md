@@ -16,6 +16,7 @@ Viewing and Cancelling booking : After loggin in, you can view your trip booking
 Viewing profile : you can view your profile details, including name, email, contact information, adress and payment method.
 
 
+
 Driver 
 
 Registration : Run the program and choose the option to register as a new driver. As the first strp of registration, you will go through the age eligibility check. If you are eligible, you can proceed to registration. Enter your name, email, contact information, address, driving license details and vehicle information. Your information will be saved and you can log in now. 
