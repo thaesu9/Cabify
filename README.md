@@ -3,7 +3,6 @@ Student ID : 270357713 | Student NAME: Kolisi Florence Sera Taele
 Student ID: 270400075 | Student NAME:Thae Su Naing
 
 # How to use Cabify :
--------------------
 ### Customer 
 
 Registration : Run the program and choose the option to register as a new customer. Enter your name, email, contact phone number, address and payment method. If you choose card payment, provide your visa card details. Your information will be saved and you can log in now.
@@ -43,7 +42,6 @@ System Management : Admin can perform various system management tasks such as vi
 
 
 # Key Functionalities
--------------------
 Registration and Login : Customers and drivers can register with their details and log in using their email and password. Admins have a separate login with unique credentials.
 
 Trip Booking and Management : Customers can book trips, view booking history and cancel the trip. Drivers can accept the available trips, view trip information, and view their trip history.
@@ -52,7 +50,6 @@ Admin Management : Admins can view and edit customers and drivers information. A
 
 
 # File Management
----------------
 customer.txt - Stores customer information.
 driver.txt - stores driver information.
 
