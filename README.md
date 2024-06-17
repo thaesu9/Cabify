@@ -51,5 +51,6 @@ Admin Management : Admins can view and edit customers and drivers information. A
 
 # File Management
 customer.txt - Stores customer information.
+
 driver.txt - stores driver information.
 
