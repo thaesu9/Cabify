@@ -14,7 +14,7 @@ Booking a trip : you have to be a registered customer to book a trip. After logg
 Viewing and Cancelling booking : After loggin in, you can view your trip booking history, including trip status and details. You can cancel the trip by using the unique trip ID provided.
 
 Viewing profile : you can view your profile details, including name, email, contact information, adress and payment method.
-`````````````````
+/////////////////
 
 Driver 
 
@@ -25,7 +25,7 @@ Login : Choose the option to log in as registered driver. Enter your registered 
 Viewing and Accepting trips : After loggin in, you cam view available trip by choosing the option. Driver can choose to accept or reject the trip. Accept the trip to start the ride. Your trip details will be provided and updated.
 
 Viewing trip history : You can view your trip history including details of the completed and ongoing trip.
-````````````````````
+//////////////////
 
 Admin
 
@@ -40,7 +40,7 @@ Viewing Driver information : Choose the option to view driver information. Enter
 Editing Driver information : choose the option to edit driver information. Enter driver's ID to search for the driver. Their registered details will be presented and the admin can now edit the required fields such as name, contact number, address and payment method. The updated information will be saved in the system and reflected in the driver.txt file.
 
 System Management : Admin can perform various system management tasks such as viewing trips, searching required information and handling user accounts.
-````````````````````
+///////////////////
 
 Key Functionalities
 -------------------
@@ -49,7 +49,7 @@ Registration and Login : Customers and drivers can register with their details a
 Trip Booking and Management : Customers can book trips, view booking history and cancel the trip. Drivers can accept the available trips, view trip information, and view their trip history.
 
 Admin Management : Admins can view and edit customers and drivers information. Admins can manage trips, handle driver assignments and perform other administrative tasks.
-````````````````````
+///////////////////
 
 File Management
 ---------------
