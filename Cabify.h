@@ -107,6 +107,7 @@ void CancelBooking(const std::string* email);
 void DriverDriveNow(const std::string* email);  // getting trip for driver
 
 // customer - CustomerFunctions.cpp
+bool VisaCardCheck(const std::string& visaCard);  // visa card check
 void NewAcc();
 void ExistingAcc();
 void BookCab(); // main menu

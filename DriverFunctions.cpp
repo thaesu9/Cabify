@@ -374,6 +374,7 @@ void ExistingDriverAcc()
                         cout << " 3. View my Vehicle Profile" << endl;
                         cout << " 4. My Driving History" << endl;
                         cout << " 0. Back" << endl;
+                        cout << " 9. Exit" << endl;
                         int choice;
                         cout << "\n Choice : ";
                         cin >> choice;
@@ -479,6 +480,12 @@ void ExistingDriverAcc()
                             // return menu
                             ClearScreen();
                             return;
+
+                        case 9:
+                            ClearScreen();
+                            cout << "\nThank you for using Cabify. Please come again." << endl;
+                            exit(0); // to entire exit and end the program
+                            break;
 
                         default:
                             ClearScreen();

@@ -4,6 +4,7 @@
 #include <math.h>
 #include <cstdlib>
 #include <ctime>
+#include <fstream>
 
 #include "Cabify.h"
 
@@ -118,7 +119,9 @@ void customerInformation()
 		cout << "\n 1. Name" << endl;
 		cout << " 2. Email" << endl;
 		cout << " 3. View all customers " << endl;
+		cout << " 4. Edit customer information " << endl;
 		cout << " 0. Back" << endl;
+		cout << " 9. Exit" << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -251,10 +254,141 @@ void customerInformation()
 			ClearScreen();
 			break;
 
+		case 4:
+			ClearScreen();
+			cout << "\n Enter Customer Email : ";
+			getline(cin, email);
+			{
+				bool found = false;
+				for (auto& cus : customers)
+				{
+					if (email == cus.email)
+					{
+						ClearScreen();
+						cout << "\n Customer Details" << endl;
+						cout << " -----------------------------" << endl;
+						cout << " Name           : " << cus.fullName << endl;
+						cout << " Email          : " << cus.email << endl;
+						cout << " Contact Number : " << cus.phone << endl;
+						cout << " Address        : " << cus.address << endl << endl;
+						if (cus.paymentMethod == 2)
+						{
+							cout << " Payment Method : Cash" << endl;
+						}
+						else if (cus.paymentMethod == 1)
+						{
+							cout << " Payment Method : Card" << endl;
+						}
+						cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
+
+						cout << endl;
+						cout << "\n Edit Customer Details" << endl;
+						cout << " -----------------------------" << endl;
+						cout << " Customer First Name : ";
+						getline(cin, cus.firstName);   // use getline to read entire line (including space)
+						cout << " Customer Last Name : ";
+						getline(cin, cus.lastName);
+
+						cus.fullName = cus.firstName + " " + cus.lastName;  // string concatenation
+
+						cout << " Current Contact Number : ";
+						getline(cin, cus.phone);
+
+						cout << " Current Address : ";
+						getline(cin, cus.address);
+
+						while (true)
+						{
+							cout << " Payment method (Choose, 1 = card, 2 = cash) : ";
+							cin >> cus.paymentMethod;
+							if (cin.fail() || (cus.paymentMethod != 1 && cus.paymentMethod != 2))
+							{
+								cin.clear(); // clear input
+								cin.ignore(); // discard invalid input
+								cout << " Invalid choice. Please enter 1 for card or 2 for cash." << endl << endl;
+							}
+							else
+							{
+								break;
+							}
+						}
+						cin.ignore();
+						if (cus.paymentMethod == 1)
+						{
+							while (true)
+							{
+								cout << " Please enter Visa Card Number (no spacing) : ";
+								getline(cin, cus.visaCard);
+
+								if (VisaCardCheck(cus.visaCard))
+								{
+									break;
+								}
+								else
+								{
+									cout << "\n Invalid visa card. Please fill the valid visa card." << endl << endl;
+								}
+
+							}
+
+							cout << " Visa card expiry date (MM/YY) : ";
+							getline(cin, cus.visaExp);
+						}
+						else
+						{
+							cus.visaCard = "nil";
+							cus.visaExp = "nil";
+						}
+
+						cout << "\n Customer information updated successfully. Press Enter to go back." << endl;
+						cin.get();
+						found = true;
+						ClearScreen();
+
+						
+						// update in customer.txt file
+						fstream customerFile("customer.txt", ios::out | ios::trunc);
+						if (customerFile.is_open())
+						{
+							for (const auto& cus : customers)
+							{
+								customerFile << " Name           : " << cus.fullName << endl;
+								customerFile << " Email          : " << cus.email << endl;
+								customerFile << " Contact Number : " << cus.phone << endl;
+								customerFile << " Address        : " << cus.address << endl;
+								if (cus.paymentMethod == 2)
+								{
+									customerFile << " Payment Method : Cash" << endl;
+								}
+								else if (cus.paymentMethod == 1)
+								{
+									customerFile << " Payment Method : Card" << endl;
+									customerFile << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
+								}
+								customerFile << endl;
+								customerFile.close();
+							}
+						}
+					}
+				}
+				if (!found)
+				{
+					cout << "\n Customer information not found. Press Enter to go back." << endl;
+					cin.get();
+					ClearScreen();
+				}
+			}
+
 		case 0:
 			// back to previous menu
 			ClearScreen();
 			return;
+
+		case 9:
+			ClearScreen();
+			cout << "\nThank you for using Cabify. Please come again." << endl;
+			exit(0); // to entire exit and end the program
+			break;
 
 		default:
 			ClearScreen();
@@ -275,7 +409,9 @@ void driverInformation()
 		cout << "\n 1. Name" << endl;
 		cout << " 2. Driver ID" << endl;
 		cout << " 3. View all drivers" << endl;
+		cout << " 4. Edit driver information" << endl;
 		cout << " 0. Back" << endl;
+		cout << " 9. Exit" << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -459,10 +595,138 @@ void driverInformation()
 			ClearScreen();
 			break;
 
+		case 4:
+			// edit driver information
+			ClearScreen();
+			cout << "\n Enter Driver ID : ";
+			getline(cin, ID);
+			{
+				bool found = false;
+				for (auto& driver : drivers)
+				{
+					if (ID == driver.driverID)
+					{
+						ClearScreen();
+						cout << "\n Driver Details" << endl;
+						cout << " -----------------------------------------" << endl;
+						cout << " Cabify ID       : " << driver.driverID << endl;
+						cout << " Name            : " << driver.fullName << endl;
+						cout << " Date of birth   : " << driver.dob << endl;
+
+						if (driver.gender == 1)
+							cout << " Gender          : Male " << endl;
+						else if (driver.gender == 2)
+							cout << " Gender          : Female " << endl;
+						else if (driver.gender == 3)
+							cout << " Gender          : Gender Diverse " << endl;
+						else
+							cout << " Gender          : Nil " << endl;
+
+						cout << " Nationality     : " << driver.nationality << endl;
+						cout << " Email           : " << driver.email << endl;
+						cout << " Contact Number  : " << driver.phone << endl;
+						cout << " Address         : " << driver.address << endl << endl;
+						cout << " Driver License  : " << driver.D_licenseNum << endl;
+						cout << " License Version : " << driver.D_licenseVersion << endl;
+						cout << " License Expiry  : " << driver.licenseExpireDate << endl << endl;
+						cout << " Bank Account    : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl << endl;
+
+						cout << "\n Vehicle Details of Driver ID " << driver.driverID << endl;
+						cout << " -----------------------------------------" << endl;
+						cout << " Car Model           : " << driver.carModel << endl;
+						cout << " Car Licence Plate   : " << driver.licensePlate << endl;
+						cout << " Car Production Year : " << driver.carYear << endl;
+						cout << " WOF Expiry Date     : " << driver.WOFexpire << endl << endl;
+
+						cout << endl;
+						cout << "\n Edit Driver Details" << endl;
+						cout << " -----------------------------------------" << endl;
+						cout << " Driver First Name : ";
+						getline(cin, driver.firstName);
+						cout << " Driver Last Name : ";
+						getline(cin, driver.lastName);
+
+						driver.fullName = driver.firstName + " " + driver.lastName;
+
+						cout << " Current Contact Number : ";
+						getline(cin, driver.phone);
+
+						cout << " Current Address : ";
+						getline(cin, driver.address);
+
+						cout << " Bank Account Number : ";
+						getline(cin, driver.bankAcc);
+
+						cout << " Bank Name : ";
+						getline(cin, driver.bankName);
+
+						cout << "\n Driver information updated successfully. Press Enter to go back." << endl;
+						cin.get();
+						found = true;
+						ClearScreen();
+
+						fstream driverFile("driver.txt", ios::out | ios::trunc);
+						if (driverFile.is_open())
+						{
+							for (const auto& driver : drivers)
+							{
+								driverFile << " Cabify ID       : " << driver.driverID << endl;
+								driverFile << " Name            : " << driver.fullName << endl;
+								driverFile << " Age             : " << driver.age << endl;
+								driverFile << " Date of birth   : " << driver.dob << endl;
+
+								if (driver.gender == 1)
+									driverFile << " Gender          : Male " << endl;
+								else if (driver.gender == 2)
+									driverFile << " Gender          : Female " << endl;
+								else if (driver.gender == 3)
+									driverFile << " Gender          : Gender Diverse " << endl;
+								else
+									driverFile << " Gender          : Nil " << endl;
+
+								driverFile << " Nationality     : " << driver.nationality << endl;
+								driverFile << " Email           : " << driver.email << endl;
+								driverFile << " Contact Number  : " << driver.phone << endl;
+								driverFile << " Address         : " << driver.address << endl << endl;
+								driverFile << " Driving Experience : " << driver.drivingExp << " years" << endl;
+								driverFile << " Driver License     : " << driver.D_licenseNum << endl;
+								driverFile << " License Version    : " << driver.D_licenseVersion << endl;
+								driverFile << " License Expiry     : " << driver.licenseExpireDate << endl << endl;
+								driverFile << " Bank Account       : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl;
+
+								driverFile << "\n Vehicle Details of Driver ID " << driver.driverID << endl;
+								driverFile << " -----------------------------------------" << endl;
+								driverFile << " Car Model           : " << driver.carModel << endl;
+								driverFile << " Car Licence Plate   : " << driver.licensePlate << endl;
+								driverFile << " Car Production Year : " << driver.carYear << endl;
+								driverFile << " WOF Expiry Date     : " << driver.WOFexpire << endl << endl;
+								driverFile << " -----------------------------------------" << endl;
+
+								driverFile << endl;
+								driverFile.close();
+							}
+						}
+					}
+				}
+				if (!found)
+				{
+					cout << "\n Driver information not found. Press Enter to go back." << endl;
+					cin.get();
+					ClearScreen();
+				}
+			}
+			break;
+
 		case 0:
 			// back to previous menu
 			ClearScreen();
 			return;
+
+		case 9:
+			ClearScreen();
+			cout << "\nThank you for using Cabify. Please come again." << endl;
+			exit(0); // to entire exit and end the program
+			break;
 
 		default:
 			ClearScreen();
@@ -482,6 +746,7 @@ void TripInformation()
 		cout << "\n 1. View all trips" << endl;
 		cout << " 2. Search by Trip ID" << endl;
 		cout << " 0. Back" << endl;
+		cout << " 9. Exit " << endl;
 		int choice;
 		cout << "\n Choice: ";
 		cin >> choice;
@@ -588,6 +853,12 @@ void TripInformation()
 			// back to previous menu
 			ClearScreen();
 			return;
+
+		case 9:
+			ClearScreen();
+			cout << "\nThank you for using Cabify. Please come again." << endl;
+			exit(0); // to entire exit and end the program
+			break;
 
 		default:
 			ClearScreen();

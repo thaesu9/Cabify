@@ -210,6 +210,7 @@ void ExistingAcc()
                         cout << " 3. View my Profile" << endl;
                         cout << " 4. My Bookings" << endl;
                         cout << " 0. Back" << endl;
+                        cout << " 9. Exit" << endl;
                         int choice;
                         cout << "\n Choice : ";
                         cin >> choice;
@@ -314,6 +315,12 @@ void ExistingAcc()
                             // return
                             ClearScreen();
                             return;
+
+                        case 9:
+                            ClearScreen();
+                            cout << "\nThank you for using Cabify. Please come again." << endl;
+                            exit(0); // to entire exit and end the program
+                            break;
 
                         default:
                             ClearScreen();
