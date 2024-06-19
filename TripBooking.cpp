@@ -280,18 +280,15 @@ void CancelBooking(const string* email)
 void DriverDriveNow(const string* email)
 {
     cin.ignore();
-    cout << "\n Your Trip Information " << endl;
-    cout << " ------------------------------------" << endl;
     // check for available trips
     bool tripsAvailable = false;
     for (auto& trip : journey)
     {
         if (!tripsAvailable && trip.tripStatus)
         {
-            trip.assigned = true;
-            tripsAvailable = true;
-            trip.driverstatus = true;
-
+            ClearScreen();
+            cout << "\n Available Trip Information " << endl;
+            cout << " ------------------------------------" << endl;
             cout << " Trip ID              : " << trip.tripID << endl;
             cout << "\n Customer Name        : " << trip.customerName << endl;
             cout << " Pick Up Location     : " << trip.tripStart << endl;
@@ -310,25 +307,81 @@ void DriverDriveNow(const string* email)
             else
                 cout << " Special Request      : None " << endl << endl;
 
-            if(trip.payStatus == true)
-                cout << " Payment Status       : Paid " << endl << endl;
-            else
-                cout << " Payment Status       : Pending (Please collect from the customer.) " << endl << endl;
+            int choice;
+            cout << "\n Accept the trip? : " << endl;
+            cout << "\n 1. Yes " << endl;
+            cout << " 2. No" << endl;
+            cout << " 0. Back" << endl;
+            cout << "\n Choice : ";
+            cin >> choice;
 
-            // assigning to certain driver ID
-            for (auto& driver : drivers)
+            switch (choice)
             {
-                if (driver.email == *email)
-                {
-                    trip.driverID = driver.driverID;
-                    trip.driverName = driver.firstName;
-                    trip.licensePlate = driver.licensePlate;
-                }
-            }
-        }
+            case 1:
+                trip.assigned = true;
+                tripsAvailable = true;
+                trip.driverstatus = true;
 
-        cout << " Press Enter to go back." << endl;
-        cin.get();
+                ClearScreen();
+                cout << "\n You have accepted the trip." << endl;
+                cout << "\n Your Trip Information " << endl;
+                cout << " ------------------------------------" << endl;
+                cout << " Trip ID              : " << trip.tripID << endl;
+                cout << "\n Customer Name        : " << trip.customerName << endl;
+                cout << " Pick Up Location     : " << trip.tripStart << endl;
+                cout << " Drop Off Location    : " << trip.tripEnd << endl;
+                cout << " Booking Date         : " << trip.bookingDate << endl;
+                cout << " Booking Time         : " << trip.bookingTime << endl;
+                cout << " Number of Passengers : " << trip.passengers << endl;
+                cout << " Number of Luggages   : " << trip.luggage << endl;
+
+                if (trip.specialN == 1)
+                    cout << " Special Request      : None " << endl << endl;
+                else if (trip.specialN == 2)
+                    cout << " Special Request      : Passenger has a baby " << endl << endl;
+                else if (trip.specialN == 3)
+                    cout << " Special Request      : Passenger needs special aid " << endl << endl;
+                else
+                    cout << " Special Request      : None " << endl << endl;
+
+                if (trip.payStatus == true)
+                    cout << " Payment Status       : Paid " << endl << endl;
+                else
+                    cout << " Payment Status       : Pending (Please collect from the customer.) " << endl << endl;
+
+                // assigning to certain driver ID
+                for (auto& driver : drivers)
+                {
+                    if (driver.email == *email)
+                    {
+                        trip.driverID = driver.driverID;
+                        trip.driverName = driver.firstName;
+                        trip.licensePlate = driver.licensePlate;
+                    }
+                }
+
+                cin.ignore();
+                cout << " Press Enter to go back." << endl;
+                cin.get();
+                break;
+
+            case 2:
+                cout << "\n Press Enter to go back." << endl;
+                cin.get();
+                break;
+
+            case 0:
+                // return
+                ClearScreen();
+                return;
+
+            default:
+                ClearScreen();
+                cout << "Invalid choice. Please choose again : ";
+                break;
+
+            }  
+        }
     }
     if (!tripsAvailable)
     {
