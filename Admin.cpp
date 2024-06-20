@@ -231,22 +231,18 @@ void customerInformation()
 			ClearScreen();
 			cout << "\n All Customers Information " << endl;
 			cout << " =========================================" << endl;
-			for (const auto& cus : customers)
+			// display all customer information with file handling
 			{
-				cout << "\n Name           : " << cus.fullName << endl;
-				cout << " Email          : " << cus.email << endl;
-				cout << " Contact Number : " << cus.phone << endl;
-				cout << " Address        : " << cus.address << endl << endl;
-				if (cus.paymentMethod == 2)
+				fstream CustomerFile;
+				CustomerFile.open("customer.txt", ios::in);
+				string information;
+
+				while (getline(CustomerFile, information))
 				{
-					cout << " Payment Method : Cash" << endl;
+					cout << information << endl;
 				}
-				else if (cus.paymentMethod == 1)
-				{
-					cout << " Payment Method : Card" << endl;
-				}
-				cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl << endl;
-				cout << " -----------------------------------------" << endl << endl;
+				CustomerFile.close();
+				cout << endl;
 			}
 			cout << "\n Press Enter to go back." << endl;
 			cin.get();
@@ -553,40 +549,19 @@ void driverInformation()
 
 			cout << "\n All Drivers Information " << endl;
 			cout << " =========================================" << endl;
-			for (const auto& driver : drivers)
+			
+			// view all driver information from file handling
 			{
-				cout << "\n Driver ID " << driver.driverID << endl;
-				cout << " -----------------------------------------" << endl;
-				cout << " Cabify ID       : " << driver.driverID << endl;
-				cout << " Name            : " << driver.fullName << endl;
-				cout << " Date of birth   : " << driver.dob << endl;
+				fstream DriverFile;
+				DriverFile.open("driver.txt", ios::in);
+				string information;
 
-				if (driver.gender == 1)
-					cout << " Gender          : Male " << endl;
-				else if (driver.gender == 2)
-					cout << " Gender          : Female " << endl;
-				else if (driver.gender == 3)
-					cout << " Gender          : Gender Diverse " << endl;
-				else
-					cout << " Gender          : Nil " << endl;
-
-				cout << " Nationality     : " << driver.nationality << endl;
-				cout << " Email           : " << driver.email << endl;
-				cout << " Contact Number  : " << driver.phone << endl;
-				cout << " Address         : " << driver.address << endl << endl;
-				cout << " Driver License  : " << driver.D_licenseNum << endl;
-				cout << " License Version : " << driver.D_licenseVersion << endl;
-				cout << " License Expiry  : " << driver.licenseExpireDate << endl << endl;
-				cout << " Bank Account    : " << driver.bankAcc << " (" << driver.bankName << " Bank)" << endl << endl;
-
-				cout << "\n Vehicle Details of Driver ID " << driver.driverID << endl;
-				cout << " -----------------------------------------" << endl;
-				cout << " Car Model           : " << driver.carModel << endl;
-				cout << " Car Licence Plate   : " << driver.licensePlate << endl;
-				cout << " Car Production Year : " << driver.carYear << endl;
-				cout << " WOF Expiry Date     : " << driver.WOFexpire << endl << endl;
-				cout << " -----------------------------------------" << endl << endl;
-
+				while (getline(DriverFile, information))
+				{
+					cout << information << endl;
+				}
+				DriverFile.close();
+				cout << endl;
 			}
 			
 			cout << "\n Press Enter to go back." << endl;

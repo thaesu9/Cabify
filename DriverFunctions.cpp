@@ -106,8 +106,16 @@ void NewDriverAcc()
     cin.ignore();
     while (true)
     {
-        cout << " Email : ";
-        getline(cin, newDriver.email);
+        // not to let user enter empty email
+        do{
+            cout << " Email : ";
+            getline(cin, newDriver.email);
+
+            if (newDriver.email.empty())
+            {
+                cout << " Please enter your email address." << endl << endl;
+            }
+        } while (newDriver.email.empty());
 
         bool emailExists = false;
         for (const auto& customer : customers)
@@ -141,8 +149,17 @@ void NewDriverAcc()
             break; // if email is unique, exit
         }
     }
-    cout << " Password : ";
-    getline(cin, newDriver.password);
+    
+    // not to let user enter empty password
+    do{
+        cout << " Password : ";
+        getline(cin, newDriver.password);
+
+        if (newDriver.password.empty())
+        {
+            cout << " Please enter your password." << endl << endl;
+        }
+    } while (newDriver.password.empty());
 
     ClearScreen();
     cout << "\n Driver Registration Page" << endl;
@@ -445,8 +462,8 @@ void ExistingDriverAcc()
                                 {
                                     if (driver.firstName == trip.driverName)
                                     {
-                                        cout << " Trip ID           : " << trip.tripID << endl;
-                                        cout << " Customer Name     : " << trip.customerName << endl;
+                                        cout << " Trip ID              : " << trip.tripID << endl;
+                                        cout << " Customer Name        : " << trip.customerName << endl;
                                         cout << " Pick Up Location     : " << trip.tripStart << endl;
                                         cout << " Drop Off Location    : " << trip.tripEnd << endl;
                                         cout << " Booking Date         : " << trip.bookingDate << endl;

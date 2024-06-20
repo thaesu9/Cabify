@@ -34,8 +34,6 @@ void TripBooking(const string* email)
 
     num.push_back(randomNum);
     newTrip.tripID = randomNum;
-
-    // newTrip.tripID = 1000 + rand() % 9000; // to generate random 4 digit code
     
     cin.ignore();
     cout << " \n Let Cabify take you to your destination." << endl << endl;

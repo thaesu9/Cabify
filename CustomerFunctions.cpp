@@ -71,8 +71,16 @@ void NewAcc()
     cin.ignore();
     while (true) 
     {
-        cout << " Email : ";
-        getline(cin, newCus.email);
+        // not to let user enter empty email
+        do{
+            cout << " Email : ";
+            getline(cin, newCus.email);
+
+            if (newCus.email.empty())
+            {
+                cout << " Please enter your email address." << endl << endl;
+            }
+        } while (newCus.email.empty());
 
         bool emailExists = false;
         for (const auto& customer : customers)
@@ -98,8 +106,16 @@ void NewAcc()
         }
     }
 
-    cout << " Password : ";
-    getline(cin, newCus.password);
+    // not to let user enter empty password
+    do{
+        cout << " Password : ";
+        getline(cin, newCus.password);
+
+        if (newCus.password.empty())     // if the user enter password is empty
+        {
+            cout << " Please enter your password." << endl << endl;
+        }
+    } while (newCus.password.empty());
 
     ClearScreen();
     cout << "\n Customer Registration Page" << endl;

@@ -1,2 +1,6 @@
-﻿  TripBooking.cpp
-  Project_Cabify.vcxproj -> D:\Users\270400075\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe
+﻿F:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project_Cabify-Blossom-Lappy.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  CustomerFunctions.cpp
+  DriverFunctions.cpp
+  Generating Code...
+  LINK : F:\Yoobee - Onedrive\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe not found or not built by the last incremental link; performing full link
+  Project_Cabify.vcxproj -> F:\Yoobee - Onedrive\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe
