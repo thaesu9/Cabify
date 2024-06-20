@@ -1,0 +1,26 @@
+ Cabify ID       : 0001
+ Name            : blossom blossom
+ Age             : 23
+ Date of birth   : 12/3/1999
+ Gender          : Female 
+ Nationality     : mm
+ Email           : blossom
+ Contact Number  : 2222
+ Address         : 12
+
+ Driving Experience : 2 years
+ Driver License     : 222
+ License Version    : 22
+ License Expiry     : 12/12/2029
+
+ Bank Account       : 2222 (asb Bank)
+
+ Vehicle Details of Driver ID 0001
+ -----------------------------------------
+ Car Model           : Sexy Lexus
+ Car Licence Plate   : LNS441
+ Car Production Year : 2017
+ WOF Expiry Date     : 12/12/2029
+
+ -----------------------------------------
+

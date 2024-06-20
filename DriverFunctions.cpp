@@ -293,7 +293,7 @@ void NewDriverAcc()
 
         if (Date >> newDriver.WOFdd >> slash1 >> newDriver.WOFmm >> slash2 >> newDriver.WOFyyyy)
         {
-            if (slash1 == '/' && slash2 == '/' && CheckDate(newDriver.Ldd, newDriver.Lmm, newDriver.Lyyyy))
+            if (slash1 == '/' && slash2 == '/' && CheckDate(newDriver.WOFdd, newDriver.WOFmm, newDriver.WOFyyyy))
             {
                 break;
             }

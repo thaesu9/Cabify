@@ -1,0 +1,6 @@
+ Name           : hx l
+ Email          : huixiao
+ Contact Number : 2222
+ Address        : newlynn
+ Payment Method : Cash
+
