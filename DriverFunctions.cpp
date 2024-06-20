@@ -339,7 +339,7 @@ void NewDriverAcc()
     static int IDnum = 1;  // initialize driver ID count start from 1
     int driverID = IDnum++; // increase if 1 already exist
     newDriver.driverID = to_string(driverID); // convert to string to convert to 0001
-    newDriver.driverID.insert(newDriver.driverID.begin(), 4 - newDriver.driverID.length(), '0');  // convert to 0001
+    newDriver.driverID.insert(newDriver.driverID.begin(), 2 - newDriver.driverID.length(), '0');  // convert to 01
 
     drivers.push_back(newDriver);
 

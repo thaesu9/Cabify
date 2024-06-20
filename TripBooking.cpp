@@ -54,7 +54,12 @@ void TripBooking(const string* email)
 
         if (Date >> dd >> slash1 >> mm >> slash2 >> yyyy)
         {
-            if (slash1 == '/' && slash2 == '/' && CheckDate(dd, mm, yyyy))
+            if (yyyy < 2024 || yyyy > 2024)
+            {
+                cout << " Invalid date. Please fill again." << endl << endl;
+            }
+
+            else if (slash1 == '/' && slash2 == '/' && CheckDate(dd, mm, yyyy))
             {
                 newTrip.bookingDate = to_string(dd) + "/" + to_string(mm) + "/" + to_string(yyyy);
                 break;
@@ -63,15 +68,51 @@ void TripBooking(const string* email)
             {
                 cout << " Invalid date. Please fill again." << endl << endl;
             }
+
+            
         }
     }
-
+    
     cout << " Booking Time (00:00 am/pm) : ";
     getline(cin, newTrip.bookingTime);
-    cout << " Number of Passengers : ";
-    cin >> newTrip.passengers;
-    cout << " Number of Luggages : ";
-    cin >> newTrip.luggage;
+
+    while(true)
+    {
+        cout << " Number of Passengers : ";
+        cin >> newTrip.passengers;
+
+        if (newTrip.passengers > 6)
+        {
+            cout << " Too many passengers. Please choose again." << endl << endl;
+        }
+        else if (newTrip.passengers < 0)
+        {
+            cout << " Invalid customer. Please choose again." << endl << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
+    
+    while (true)
+    {
+        cout << " Number of Luggages : ";
+        cin >> newTrip.luggage;
+
+        if (newTrip.luggage > 8)
+        {
+            cout << " Too many passengers. Please choose again." << endl << endl;
+        }
+        else if (newTrip.luggage < 0)
+        {
+            cout << " Invalid customer. Please choose again." << endl << endl;
+        }
+        else
+        {
+            break;
+        }
+    }
 
     // special needs
     int aidChoice;
