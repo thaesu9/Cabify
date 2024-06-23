@@ -13,6 +13,36 @@ using namespace std;
 
 vector<Driver> drivers;
 
+// check whether user input for Driving License is valid or not
+bool ValidLicense(string license)
+{
+    // driving license is 2 alphabet + 6 numbers = total 8 digits
+    // if the input is not 8 digits, return false
+    if (license.length() != 8)
+    {
+        return false;
+    }
+
+    // if the first 2 character inputs is not alphabet, return false
+    for (int i = 0; i < 2; i++)
+    {
+        if (!isalpha(license[i]))
+        {
+            return false;
+        }
+    }
+
+    // if the last 6 character inputs are not numbers, return false
+    for (int i = 2; i < 8; i++)
+    {
+        if (!isdigit(license[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
 void DriverFile(const Driver& driver)
 {
     fstream driverFile;
@@ -83,7 +113,7 @@ void NewDriverAcc()
     int exp;
     cin >> exp;
     int n = age - exp;
-    if (n < 17)
+    if (n < 16)
     {
         cout << "\n Your age and years of driving experience is irrelevant. You did not meet the requirement." << endl;
         cin.ignore();
@@ -223,8 +253,23 @@ void NewDriverAcc()
     cout << " Address : ";
     getline(cin, newDriver.address);
 
-    cout << " Driving License Number : ";
-    getline(cin, newDriver.D_licenseNum);
+    // driving license number
+    while (true)
+    {
+        string license;
+        cout << " Driving License Number : ";
+        getline(cin, license);
+
+        if (ValidLicense(license))
+        {
+            newDriver.D_licenseNum = license;
+            break;
+        }
+        else
+        {
+            cout << " Invalid license format. Please fill again." << endl << endl;
+        }
+    }
 
     cout << " Driving License Version : ";
     getline(cin, newDriver.D_licenseVersion);

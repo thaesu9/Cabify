@@ -374,6 +374,7 @@ void customerInformation()
 					ClearScreen();
 				}
 			}
+			break;
 
 		case 0:
 			// back to previous menu
