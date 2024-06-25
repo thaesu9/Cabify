@@ -12,6 +12,7 @@ using namespace std;
 
 vector<Customer> customers; // definition of extern variable
 
+// check for valid visa card, 16 digits and start with '4'
 bool VisaCardCheck(const string& visaCard)
 {
     if (visaCard.length() != 16)
@@ -82,7 +83,8 @@ void NewAcc()
             }
         } while (newCus.email.empty());
 
-        bool emailExists = false;
+        bool emailExists = false;  // to check if email exist in the system
+        // find email in customer vector
         for (const auto& customer : customers)
         {
             if (newCus.email == customer.email)
@@ -91,7 +93,17 @@ void NewAcc()
                 break;
             }
         }
+        // find email in driver vector
+        for (const auto& driver : drivers)
+        {
+            if (newCus.email == driver.email)
+            {
+                emailExists = true;
+                break;
+            }
+        }
 
+        // if the email already exist in the system
         if (emailExists)
         {
             ClearScreen();
@@ -138,7 +150,7 @@ void NewAcc()
     {
         cout << " Payment method (Choose, 1 = card, 2 = cash) : ";
         cin >> newCus.paymentMethod;
-        if (cin.fail() || (newCus.paymentMethod != 1 && newCus.paymentMethod != 2))
+        if (cin.fail() || (newCus.paymentMethod != 1 && newCus.paymentMethod != 2)) // if user input fail or user input != 1 or != 2
         {
             cin.clear(); // clear input
             cin.ignore(); // discard invalid input
@@ -150,6 +162,7 @@ void NewAcc()
         }
     }
     cin.ignore();
+    // if the user input for payment method is 1, ask for visa card information
     if (newCus.paymentMethod == 1)
     {
         while (true)
@@ -157,6 +170,7 @@ void NewAcc()
             cout << " Please enter Visa Card Number (no spacing) : ";
             getline(cin, newCus.visaCard);
 
+            // check for visa card validity using function
             if (VisaCardCheck(newCus.visaCard))
             {
                 break;
@@ -171,6 +185,7 @@ void NewAcc()
         cout << " Visa card expiry date (MM/YY) : ";
         getline(cin, newCus.visaExp);
     }
+    // if the user payment method input is 2, put "nil" in visa card and visa expiration
     else
     {
         newCus.visaCard = "nil";
@@ -179,8 +194,7 @@ void NewAcc()
 
     customers.push_back(newCus);  // add new customer in vector
 
-    // file handling
-    CustomerFile(newCus);
+    CustomerFile(newCus);         // add new customer to customer.txt file
 
     ClearScreen();
     cout << "\n Thank you for joining Cabify. You can now start your journey." << endl;
@@ -202,7 +216,7 @@ void ExistingAcc()
     bool found = 0;
     bool incorrectPW = 0; // for wrong password attempts
     int attempt = 0;      // num of attempts
-    int maxAttempt = 10;
+    int maxAttempt = 10;  // maximum number of attempt is 10 times
 
     while(attempt < maxAttempt)
     {
@@ -345,23 +359,23 @@ void ExistingAcc()
                         }
                     }
                 }
-                else
+                else  // if email is correct with incorrect password
                 {
-                    incorrectPW = 1;
+                    incorrectPW = 1;  // incorrect password boolean = true
                 }
             }
         }
-        if (found)
+        if (found) // if the email is found and correct password
         {
             break;
         }
-        else if (incorrectPW)
+        else if (incorrectPW) // if the password is incorrect
         {
             cout << "\n Incorrect password. Please try again." << endl;
             incorrectPW = 0;
             attempt++;
         }
-        else
+        else // if the email is not found in the system
         {
             cout << "\n No account found. Press Enter to go back to register." << endl;
             cin.get();

@@ -10,8 +10,9 @@
 
 using namespace std;
 
-extern Admin adm;
+extern Admin adm;  // redundant use of struct, extend the visibility
 
+// admin login function
 void adminLogin()
 {
 	cout << "\n Welcome to Admin Panel. Please login to proceed." << endl;
@@ -25,12 +26,13 @@ void adminLogin()
 	cout << " Password : ";
 	cin >> password;
 
+	// give the admin login attempt 3 times
 	while ((username != adm.username || password != adm.password) && times < 2)
 	{
 		cout << "\n Wrong username and password! Try again." << endl;
 
-		times++;
-		adm.failedAttempts++;
+		times++;  // time of tries
+		adm.failedAttempts++;  // number of attempts (in struct)
 		cout << "\n Username : ";
 		cin >> username;
 
@@ -45,6 +47,7 @@ void adminLogin()
 	}
 	else
 	{
+		// if the login attempt is failed, don't let the user login as admin again in this system run.
 		cout << "\n Login attempt failed. Press Enter to go back to main menu." << endl;
 		cin.ignore();
 		cin.get();
@@ -109,7 +112,7 @@ void adminMenu()
 }
 
 
-// Customer information
+// Manage Customer information
 void customerInformation()
 {
 	string firstName, lastName, fullName, email;
@@ -132,7 +135,7 @@ void customerInformation()
 		case 1:
 			ClearScreen();
 
-			// search by name
+			// search customer by name
 			cout << "\n Customer Details" << endl;
 			cout << " -----------------" << endl;
 			cout << " Enter Customer First Name : ";
@@ -141,8 +144,8 @@ void customerInformation()
 			getline(cin, lastName);
 			fullName = firstName + " " + lastName;
 			{
-				bool found = false;
-				for (const auto& cus : customers)
+				bool found = false;  // boolean for customer found or not
+				for (const auto& cus : customers)  // search customer name through customer vector
 				{
 					if (fullName == cus.fullName)
 					{
@@ -170,6 +173,7 @@ void customerInformation()
 						ClearScreen();
 					}
 				}
+				// if customer information is not found
 				if (!found)
 				{
 					cout << "\n Customer information not found. Press Enter to go back." << endl;
@@ -182,7 +186,7 @@ void customerInformation()
 		case 2:
 			ClearScreen();
 
-			// search by email
+			// search customer by email
 			cout << "\n Customer Details" << endl;
 			cout << " -----------------" << endl;
 			cout << " Enter Customer Email : ";
@@ -231,7 +235,7 @@ void customerInformation()
 			ClearScreen();
 			cout << "\n All Customers Information " << endl;
 			cout << " =========================================" << endl;
-			// display all customer information with file handling
+			// display all customer information with file handling (file reading)
 			{
 				fstream CustomerFile;
 				CustomerFile.open("customer.txt", ios::in);
@@ -251,7 +255,9 @@ void customerInformation()
 			break;
 
 		case 4:
+			// edit customer information
 			ClearScreen();
+			// search customer with customer email
 			cout << "\n Enter Customer Email : ";
 			getline(cin, email);
 			{
@@ -261,6 +267,7 @@ void customerInformation()
 					if (email == cus.email)
 					{
 						ClearScreen();
+						// display customer details before editing
 						cout << "\n Customer Details" << endl;
 						cout << " -----------------------------" << endl;
 						cout << " Name           : " << cus.fullName << endl;
@@ -278,6 +285,8 @@ void customerInformation()
 						cout << " Visa Card      : " << cus.visaCard << " (" << cus.visaExp << ")" << endl;
 
 						cout << endl;
+
+						// edit customer information
 						cout << "\n Edit Customer Details" << endl;
 						cout << " -----------------------------" << endl;
 						cout << " Customer First Name : ";
@@ -342,8 +351,8 @@ void customerInformation()
 						ClearScreen();
 
 						
-						// update in customer.txt file
-						fstream customerFile("customer.txt", ios::out | ios::trunc);
+						// update the edited information in customer.txt file
+						fstream customerFile("customer.txt", ios::out | ios::trunc);  // writing and truncate (rewrite new information)
 						if (customerFile.is_open())
 						{
 							for (const auto& cus : customers)
@@ -419,7 +428,7 @@ void driverInformation()
 		case 1:
 			ClearScreen();
 
-			// search by name
+			// search driver by name
 			cout << "\n Driver Details" << endl;
 			cout << " -----------------" << endl;
 			cout << " Enter Driver First Name : ";
@@ -429,7 +438,7 @@ void driverInformation()
 			fullName = firstName + " " + lastName;
 			{
 				bool found = false;
-				for (const auto& driver : drivers)
+				for (const auto& driver : drivers)  // search driver through driver vector
 				{
 					if (fullName == driver.fullName)
 					{
@@ -485,7 +494,7 @@ void driverInformation()
 		case 2:
 			ClearScreen();
 
-			// search by driver ID
+			// search driver by driver ID
 			cout << "\n Driver Details" << endl;
 			cout << " -----------------" << endl;
 			cout << " Enter Driver ID : ";
@@ -551,13 +560,13 @@ void driverInformation()
 			cout << "\n All Drivers Information " << endl;
 			cout << " =========================================" << endl;
 			
-			// view all driver information from file handling
+			// view all driver information from file handling (file reading)
 			{
 				fstream DriverFile;
-				DriverFile.open("driver.txt", ios::in);
+				DriverFile.open("driver.txt", ios::in); // reading
 				string information;
 
-				while (getline(DriverFile, information))
+				while (getline(DriverFile, information))  // getline - to read through space and enter
 				{
 					cout << information << endl;
 				}
@@ -574,6 +583,8 @@ void driverInformation()
 		case 4:
 			// edit driver information
 			ClearScreen();
+
+			// search driver by driver ID
 			cout << "\n Enter Driver ID : ";
 			getline(cin, ID);
 			{
@@ -583,6 +594,7 @@ void driverInformation()
 					if (ID == driver.driverID)
 					{
 						ClearScreen();
+						// display driver details before editing
 						cout << "\n Driver Details" << endl;
 						cout << " -----------------------------------------" << endl;
 						cout << " Cabify ID       : " << driver.driverID << endl;
@@ -637,11 +649,12 @@ void driverInformation()
 						getline(cin, driver.bankName);
 
 						cout << "\n Driver information updated successfully. Press Enter to go back." << endl;
-						cin.get();
+						cin.get(); // cin press enter
 						found = true;
 						ClearScreen();
 
-						fstream driverFile("driver.txt", ios::out | ios::trunc);
+						// update edited driver information in driver.txt file
+						fstream driverFile("driver.txt", ios::out | ios::trunc); // file - writing, truncate
 						if (driverFile.is_open())
 						{
 							for (const auto& driver : drivers)

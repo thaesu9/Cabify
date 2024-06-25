@@ -8,7 +8,7 @@ using namespace std;
 void ClearScreen()
 {
     system("cls");  // to clear the screen
-    CabifyLogo();
+    CabifyLogo();   // to display the logo (with function in logo.cpp)
 }
 
 // Main Menu
@@ -31,7 +31,7 @@ void TermsConditions()
 {
     cout << "\033[1m"; // Bold text
     cout << "\n                            Terms and Conditions" << endl;
-    cout << "\033[0m"; // Reset
+    cout << "\033[0m"; // Reset to normal font weight
     cout << "                           ======================" << endl << endl;
     cout << "1. Introduction\n";
     cout << "---------------\n";
@@ -81,6 +81,7 @@ void TermsConditions()
     cout << "Users agree to the collection, use, and sharing of their personal information as outlined in the Privacy Policy.\n\n";
 
     cout << "9. Termination\n";
+    cout << "--------------\n";
     cout << "Cabify reserves the right to terminate or suspend access to the Service for any User or Driver who violates these terms and conditions or engages in misconduct.\n";
     cout << "Users may terminate their account at any time by contacting Cabify customer support.\n\n";
 
@@ -102,8 +103,8 @@ void TermsConditions()
     cout << "By using the Service, Users and Drivers agree to comply with these terms and conditions.\n";
 
     cout << "\n\nPress Enter to return to main menu." << endl;
-    cin.ignore();
-    cin.get();
+    cin.ignore();  // ignore previous input
+    cin.get();  // cin >> enter as user input
 
     ClearScreen();
 

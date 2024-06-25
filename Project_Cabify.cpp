@@ -28,32 +28,30 @@ bool CheckDate(int day, int month, int year)
     return day <= days[month]; // day for month
 }
 
-// vector<Customer> customers; // definition of extern variable
-
-Admin adm;
+Admin adm;  // admin struct
 
 int main()
 {
-    // to clear the file after every run
+    // to clear the file after/for every run
     fstream CustomerFile("customer.txt", ios::out);
     if (CustomerFile.is_open())
     {
         CustomerFile.close();
     }
 
+    // to clear the file after/for every run
     fstream DriverFile("driver.txt", ios::out);
     if (DriverFile.is_open())
     {
         DriverFile.close();
     }
 
-    CabifyLogo();
+    CabifyLogo();  // display logo
     int choice;
 
     while (true)
-    {
-        
-        MainMenu(&choice);
+    {        
+        MainMenu(&choice);  // main menu with int choice value
 
         switch (choice)
         {
@@ -76,6 +74,7 @@ int main()
             break;
 
         case 9:
+            // end program
             ClearScreen();
             cout << "Thank you for using Cabify. Have a nice day." << endl;
             cout << endl;
@@ -90,6 +89,7 @@ int main()
             }
             else
             {
+                // if login attempt fail beyond allowed number of attempts
                 ClearScreen();
                 cout << "\n You have reached the maximum number of attempts. Press Enter to go back to main menu." << endl;
                 cin.ignore();

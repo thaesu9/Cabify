@@ -43,10 +43,11 @@ bool ValidLicense(string license)
     return true;
 }
 
+// add registered driver information to driver file
 void DriverFile(const Driver& driver)
 {
     fstream driverFile;
-    driverFile.open("driver.txt", ios::app);
+    driverFile.open("driver.txt", ios::app); // to append in the driver file
 
     if (driverFile.is_open())
     {
@@ -92,10 +93,12 @@ void NewDriverAcc()
 {
     Driver newDriver;
     cout << "\n Thank you for choosing to drive with Cabify. \n Please fill out the form to proceed with your registration." << endl << endl;
+
+    // age check for eligibility (age between 18 to 70)
     cout << " Enter your age : ";
     int age;
     cin >> age;
-    if (age < 18 || age > 80)
+    if (age < 18 || age > 70)
     {
         cout << "\n Sorry. You cannot register as our driver. You did not meet the age requirement. " << endl;
         cin.ignore();
@@ -109,6 +112,7 @@ void NewDriverAcc()
         newDriver.age = age;
     }
     
+    // driving experience in years cross-check with age
     cout << " How many years of driving experience do you have? : ";
     int exp;
     cin >> exp;
@@ -116,6 +120,15 @@ void NewDriverAcc()
     if (n < 16)
     {
         cout << "\n Your age and years of driving experience is irrelevant. You did not meet the requirement." << endl;
+        cin.ignore();
+        cout << "\n Press Enter to go back." << endl;
+        cin.get();
+        ClearScreen();
+        return;
+    }
+    else if (exp <= 0)
+    {
+        cout << "\n You need at least 1 year driving experience. You did not meet the requirement." << endl;
         cin.ignore();
         cout << "\n Press Enter to go back." << endl;
         cin.get();
@@ -147,7 +160,9 @@ void NewDriverAcc()
             }
         } while (newDriver.email.empty());
 
+        // check if the email already exist in the system
         bool emailExists = false;
+        // find in customer vector
         for (const auto& customer : customers)
         {
             if (newDriver.email == customer.email)
@@ -156,6 +171,7 @@ void NewDriverAcc()
                 break;
             }
         }
+        // find in driver vector
         for (const auto& driver : drivers)
         {
             if (newDriver.email == driver.email)
@@ -209,7 +225,7 @@ void NewDriverAcc()
         cin >> newDriver.gender;
         if (cin.fail() || (newDriver.gender != 1 && newDriver.gender != 2 && newDriver.gender != 3))
         {
-            cin.clear(); // clear input
+            cin.clear();  // clear input
             cin.ignore(); // discard invalid input
             cout << " Invalid choice. Please choose again." << endl << endl;
         }
@@ -226,10 +242,13 @@ void NewDriverAcc()
         cout << " Date of birth (dd/mm/yyyy) : ";
         getline(cin, date);
 
+        // Create an istringstream object for parsing the date
         istringstream Date(date);
         int dd, mm, yyyy;
         char slash1, slash2;
 
+        // check valid date input
+        // Parse the date into day, month, year separated by '/'
         if (Date >> dd >> slash1 >> mm >> slash2 >> yyyy)
         {
             if (slash1 == '/' && slash2 == '/' && CheckDate(dd, mm, yyyy))
@@ -260,6 +279,7 @@ void NewDriverAcc()
         cout << " Driving License Number : ";
         getline(cin, license);
 
+        // check valid driving license input format
         if (ValidLicense(license))
         {
             newDriver.D_licenseNum = license;
@@ -281,9 +301,11 @@ void NewDriverAcc()
         cout << " Driving License Expiry Date (dd/mm/yyyy) : ";
         getline(cin, date);
 
+        // Create an istringstream object for parsing the date
         istringstream Date(date);
         char slash1, slash2;
 
+        // Parse the date into day, month, year separated by '/'
         if (Date >> newDriver.Ldd >> slash1 >> newDriver.Lmm >> slash2 >> newDriver.Lyyyy)
         {
             if (slash1 == '/' && slash2 == '/' && CheckDate(newDriver.Ldd, newDriver.Lmm, newDriver.Lyyyy))
@@ -297,6 +319,7 @@ void NewDriverAcc()
         }
     }
     
+    // check if the license is expired
     if (newDriver.Lyyyy < 2023)
     {
         cout << " Sorry. Your driving license is expired. You cannot drive for Cabify." << endl;
@@ -311,7 +334,6 @@ void NewDriverAcc()
         newDriver.licenseExpireDate = to_string(newDriver.Ldd) + "/" + to_string(newDriver.Lmm) + "/" + to_string(newDriver.Lyyyy);
     }
 
-    // cin.ignore();
     cout << " Bank Account Number : ";
     getline(cin, newDriver.bankAcc);
 
@@ -365,6 +387,7 @@ void NewDriverAcc()
             }
         }
     }
+    // check if the WOF is expired
     if (newDriver.WOFyyyy < 2023)
     {
         cout << " Sorry. Your car is unfit for driving. Please get updated warrrent of fitness(WOF) check." << endl;
@@ -383,21 +406,18 @@ void NewDriverAcc()
     // Driver ID
     static int IDnum = 1;  // initialize driver ID count start from 1
     int driverID = IDnum++; // increase if 1 already exist
-    newDriver.driverID = to_string(driverID); // convert to string to convert to 0001
+    newDriver.driverID = to_string(driverID); // convert to string to convert to 01
     newDriver.driverID.insert(newDriver.driverID.begin(), 2 - newDriver.driverID.length(), '0');  // convert to 01
 
-    drivers.push_back(newDriver);
+    drivers.push_back(newDriver);  // register new driver data to vector
 
-    // file input
-    DriverFile(newDriver);
+    DriverFile(newDriver);         // register new driver data to driver.txt file
 
     cout << "\n Thank you for registering with Cabify. Press Enter to go back." << endl;
     cin.get();
-    ClearScreen();
 
     ClearScreen();
-    cout << "\n Thank you for driving with Cabify. You can start driving now." << endl;
-    cout << " Please login to proceed with your booking." << endl;
+    cout << "\n Thank you for driving with Cabify. Please login to proceed." << endl;
 }
 
 void ExistingDriverAcc()
@@ -409,10 +429,10 @@ void ExistingDriverAcc()
     cout << "\n Email : ";
     getline(cin, email);
 
-    bool found = 0;
+    bool found = 0;       // boolean for account found
     bool incorrectPW = 0; // for wrong password attempts
     int attempt = 0;      // num of attempts
-    int maxAttempt = 10;
+    int maxAttempt = 10;  // maximum number of attempt = 10
 
     while(attempt < maxAttempt)
     {
@@ -562,16 +582,19 @@ void ExistingDriverAcc()
                 }
             }
         }
-        if (found)
+       
+        if (found) // if email address is found
         {
             break;
         }
+        // if the input password is incorrect
         else if (incorrectPW)
         {
             cout << "\n Incorrect password. Please try again." << endl;
             incorrectPW = 0;
             attempt++;
         }
+        // if the email address is not found
         else
         {
             cout << "\n No account found. Press Enter to go back to register." << endl;
