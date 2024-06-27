@@ -22,6 +22,7 @@ void MainMenu(int* choice)
     cout << " 9. Exit." << endl;
     // cout << " 6. Login as Admin" << endl;
 
+<<<<<<< HEAD
     while(true)
     {
         cout << "\n Choice: ";
@@ -36,6 +37,10 @@ void MainMenu(int* choice)
         else
             break;
     }
+=======
+    cout << "\n Choice: ";
+    cin >> *choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 }
 
 // Terms and Conditions

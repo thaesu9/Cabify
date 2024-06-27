@@ -102,7 +102,10 @@ void ClearScreen();            // clear screen and display logo as a fresh page 
 
 // Project_Cabify.cpp
 bool CheckDate(int day, int month, int year);  // to check valid date
+<<<<<<< HEAD
 bool validEmail(std::string& email);          // to check valid input email format
+=======
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
 // trip - TripBooking.cpp
 void TripBooking(const std::string* email);     // for customer trip booking

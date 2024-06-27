@@ -95,6 +95,7 @@ void NewDriverAcc()
     cout << "\n Thank you for choosing to drive with Cabify. \n Please fill out the form to proceed with your registration." << endl << endl;
 
     // age check for eligibility (age between 18 to 70)
+<<<<<<< HEAD
     int age;
     while (true)
     {
@@ -111,6 +112,11 @@ void NewDriverAcc()
             break;
     }
     
+=======
+    cout << " Enter your age : ";
+    int age;
+    cin >> age;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
     if (age < 18 || age > 70)
     {
         cout << "\n Sorry. You cannot register as our driver. You did not meet the age requirement. " << endl;
@@ -126,6 +132,7 @@ void NewDriverAcc()
     }
     
     // driving experience in years cross-check with age
+<<<<<<< HEAD
     int exp;
     while (true)
     {
@@ -142,6 +149,11 @@ void NewDriverAcc()
             break;
     }
     
+=======
+    cout << " How many years of driving experience do you have? : ";
+    int exp;
+    cin >> exp;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
     int n = age - exp;
     if (n < 16)
     {
@@ -175,7 +187,11 @@ void NewDriverAcc()
     cin.ignore();
     while (true)
     {
+<<<<<<< HEAD
         // not to let user enter empty email or invalid email format
+=======
+        // not to let user enter empty email
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
         do{
             cout << " Email : ";
             getline(cin, newDriver.email);
@@ -184,11 +200,15 @@ void NewDriverAcc()
             {
                 cout << " Please enter your email address." << endl << endl;
             }
+<<<<<<< HEAD
             else if (!validEmail(newDriver.email))
             {
                 cout << " Invalid email. Please fill valid email address." << endl << endl;
             }
         } while (newDriver.email.empty() || !validEmail(newDriver.email));
+=======
+        } while (newDriver.email.empty());
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
         // check if the email already exist in the system
         bool emailExists = false;
@@ -382,6 +402,7 @@ void NewDriverAcc()
     cout << " License Plate Number : ";
     getline(cin, newDriver.licensePlate);
 
+<<<<<<< HEAD
     while (true)
     {
         cout << " Car Production Year : ";
@@ -396,6 +417,10 @@ void NewDriverAcc()
         else
             break;
     }   
+=======
+    cout << " Car Production Year : ";
+    cin >> newDriver.carYear;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
     if (newDriver.carYear < 1990 || newDriver.carYear > 2024)
     {
         cout << " Sorry. Your car is unfit for driving. You cannot drive for Cabify with car production year older than 1990." << endl;
@@ -500,6 +525,7 @@ void ExistingDriverAcc()
                         cout << " 0. Back" << endl;
                         cout << " 9. Exit" << endl;
                         int choice;
+<<<<<<< HEAD
                         while (true)
                         {
                             cout << "\n Choice: ";
@@ -514,6 +540,10 @@ void ExistingDriverAcc()
                             else
                                 break;
                         }
+=======
+                        cout << "\n Choice : ";
+                        cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
                         switch (choice)
                         {
@@ -676,6 +706,7 @@ void DriverMainMenu()
         cout << " 0. Back" << endl;
         cout << " 9. Exit" << endl;
         int choiceB;
+<<<<<<< HEAD
         while (true)
         {
             cout << "\n Choice: ";
@@ -690,6 +721,10 @@ void DriverMainMenu()
             else
                 break;
         }
+=======
+        cout << "\n Choice: ";
+        cin >> choiceB;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
         switch (choiceB)
         {

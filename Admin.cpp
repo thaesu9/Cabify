@@ -67,6 +67,7 @@ void adminMenu()
 		cout << " 0. Back" << endl;
 		cout << " 9. Exit" << endl;
 		int choice;
+<<<<<<< HEAD
 		while (true)
 		{
 			cout << "\n Choice: ";
@@ -81,6 +82,10 @@ void adminMenu()
 			else
 				break;
 		}
+=======
+		cout << "\n Choice: ";
+		cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
 		switch (choice)
 		{
@@ -138,6 +143,7 @@ void customerInformation()
 		cout << " 0. Back" << endl;
 		cout << " 9. Exit" << endl;
 		int choice;
+<<<<<<< HEAD
 		while (true)
 		{
 			cout << "\n Choice: ";
@@ -152,6 +158,10 @@ void customerInformation()
 			else
 				break;
 		}
+=======
+		cout << "\n Choice: ";
+		cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 		cin.ignore();
 
 		switch (choice)
@@ -443,6 +453,7 @@ void driverInformation()
 		cout << " 0. Back" << endl;
 		cout << " 9. Exit" << endl;
 		int choice;
+<<<<<<< HEAD
 		while (true)
 		{
 			cout << "\n Choice: ";
@@ -457,6 +468,10 @@ void driverInformation()
 			else
 				break;
 		}
+=======
+		cout << "\n Choice: ";
+		cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 		cin.ignore();
 
 		switch (choice)
@@ -773,6 +788,7 @@ void TripInformation()
 		cout << " 0. Back" << endl;
 		cout << " 9. Exit " << endl;
 		int choice;
+<<<<<<< HEAD
 		while (true)
 		{
 			cout << "\n Choice: ";
@@ -787,6 +803,10 @@ void TripInformation()
 			else
 				break;
 		}
+=======
+		cout << "\n Choice: ";
+		cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 		cin.ignore();
 
 		switch (choice)

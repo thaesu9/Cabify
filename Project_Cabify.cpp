@@ -13,8 +13,11 @@
 
 using namespace std;
 
+<<<<<<< HEAD
 Admin adm;  // admin struct
 
+=======
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 // check if it is valid date
 bool CheckDate(int day, int month, int year)
 {
@@ -30,6 +33,7 @@ bool CheckDate(int day, int month, int year)
     return day <= days[month]; // day for month
 }
 
+<<<<<<< HEAD
 // to check for user valid input email
 bool validEmail(string& email)
 {
@@ -43,6 +47,9 @@ bool validEmail(string& email)
     }
     return false;
 }
+=======
+Admin adm;  // admin struct
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
 int main()
 {

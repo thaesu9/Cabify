@@ -83,6 +83,7 @@ void TripBooking(const string* email)
 
     while(true)
     {
+<<<<<<< HEAD
         while (true)
         {
             cout << " Number of Passengers : ";
@@ -97,6 +98,10 @@ void TripBooking(const string* email)
             else
                 break;
         }       
+=======
+        cout << " Number of Passengers : ";
+        cin >> newTrip.passengers;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
         // if number of passenger is more than 6
         if (newTrip.passengers > 6)
@@ -116,6 +121,7 @@ void TripBooking(const string* email)
     
     while (true)
     {
+<<<<<<< HEAD
         while (true)
         {
             cout << " Number of Luggages : ";
@@ -131,6 +137,10 @@ void TripBooking(const string* email)
                 break;
         }
         
+=======
+        cout << " Number of Luggages : ";
+        cin >> newTrip.luggage;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
         // if the number of luggages of more than 8
         if (newTrip.luggage > 8)
@@ -297,6 +307,7 @@ void CancelBooking(const string* email)
     long int tripID;
 
     // search with trip ID
+<<<<<<< HEAD
     while (true)
     {
         cout << "\n Enter trip ID : ";
@@ -312,6 +323,10 @@ void CancelBooking(const string* email)
             break;
     }
     
+=======
+    cout << "\n Enter trip ID : ";
+    cin >> tripID;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
     cin.ignore();
     {
         bool found = 0;
@@ -326,6 +341,7 @@ void CancelBooking(const string* email)
                     cout << "\n 1. Yes" << endl;
                     cout << " 2. No" << endl;
                     int choice;
+<<<<<<< HEAD
                     while (true)
                     {
                         cout << "\n Choice: ";
@@ -340,6 +356,10 @@ void CancelBooking(const string* email)
                         else
                             break;
                     }
+=======
+                    cout << " \n Choice : ";
+                    cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
                     switch (choice)
                     {
@@ -421,6 +441,7 @@ void DriverDriveNow(const string* email)
             cout << "\n 1. Yes " << endl;
             cout << " 2. No" << endl;
             cout << " 0. Back" << endl;
+<<<<<<< HEAD
             while (true)
             {
                 cout << "\n Choice: ";
@@ -435,6 +456,10 @@ void DriverDriveNow(const string* email)
                 else
                     break;
             }
+=======
+            cout << "\n Choice : ";
+            cin >> choice;
+>>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
             switch (choice)
             {
