@@ -1,6 +1,0 @@
- Name           : Blossom N
- Email          : blossom
- Contact Number : 21
- Address        : 2
- Payment Method : Cash
-

@@ -72,11 +72,7 @@ void NewAcc()
     cin.ignore();
     while (true) 
     {
-<<<<<<< HEAD
         // not to let user enter empty email or invalid email format
-=======
-        // not to let user enter empty email
->>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
         do{
             cout << " Email : ";
             getline(cin, newCus.email);
@@ -85,15 +81,11 @@ void NewAcc()
             {
                 cout << " Please enter your email address." << endl << endl;
             }
-<<<<<<< HEAD
             else if (!validEmail(newCus.email))
             {
                 cout << " Invalid email. Please fill valid email address." << endl << endl;
             }
         } while (newCus.email.empty() || !validEmail(newCus.email));
-=======
-        } while (newCus.email.empty());
->>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
         bool emailExists = false;  // to check if email exist in the system
         // find email in customer vector
@@ -254,7 +246,6 @@ void ExistingAcc()
                         cout << " 0. Back" << endl;
                         cout << " 9. Exit" << endl;
                         int choice;
-<<<<<<< HEAD
                         while (true)
                         {
                             cout << "\n Choice: ";
@@ -269,10 +260,6 @@ void ExistingAcc()
                             else
                                 break;
                         }
-=======
-                        cout << "\n Choice : ";
-                        cin >> choice;
->>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
                         switch (choice)
                         {
@@ -433,7 +420,6 @@ void BookCab()
         cout << " 0. Back" << endl;
         cout << " 9. Exit" << endl;
         int choiceB;
-<<<<<<< HEAD
         while (true)
         {
             cout << "\n Choice: ";
@@ -448,10 +434,6 @@ void BookCab()
             else
                 break;
         }
-=======
-        cout << "\n Choice: ";
-        cin >> choiceB;
->>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
 
         switch (choiceB)
         {

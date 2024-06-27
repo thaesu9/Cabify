@@ -1,8 +1,10 @@
-<<<<<<< HEAD
 ﻿F:\Visual Studio\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project_Cabify-Blossom-Lappy.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Project_Cabify.vcxproj -> F:\Yoobee - Onedrive\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe
-=======
-﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Project_Cabify-Blossom-Lappy.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Admin.cpp
+  CustomerFunctions.cpp
+  DriverFunctions.cpp
   Logo.cpp
-  Project_Cabify.vcxproj -> D:\Users\270400075\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe
->>>>>>> 2aef44af26f10fe1e0d9a8c5a63321d6359b9fac
+  MainMenu.cpp
+  Project_Cabify.cpp
+  TripBooking.cpp
+  Generating Code...
+  Project_Cabify.vcxproj -> F:\Yoobee - Onedrive\OneDrive - UP Education\103\Project_Cabify\x64\Debug\Project_Cabify.exe
